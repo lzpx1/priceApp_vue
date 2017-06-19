@@ -334,7 +334,7 @@
 							</f7-nav-right>
 						</f7-navbar>
 						<!-- Page Content -->
-						<div class="page-content c_body">
+						<div class="page-content c_body" :style="bgStyle">
 							<div class="c_seeks">
 								<a href="DataQuery.html">
 									<i class="iconfont icon-shujuchaxun_ green"></i>
@@ -487,7 +487,15 @@
 <script>
 	const $$ = Dom7;
 	export default {
-		data() { return { title: "" } },
+		data() { 
+			return {
+				title: "",
+				bgStyle:{
+					background: "url(" + require("./assets/bg.png") + ") no-repeat",
+					backgroundSize:'100% 100%'
+				}
+			}
+		},
 		methods: {
 			change: function(index) {
 				switch(index) {
