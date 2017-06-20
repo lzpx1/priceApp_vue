@@ -1,6 +1,6 @@
 <template>
 	<f7-page no-tabbar navbar-fixed id="Farm_foodDetail" class="dftype">
-		<f7-navbar>
+		<f7-navbar v-if="$theme.ios">
 			<f7-nav-left sliding>
 				<a href="#" class="back link">
 					<i class="iconfont icon-zuo icon-back"></i>

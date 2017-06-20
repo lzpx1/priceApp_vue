@@ -23,7 +23,6 @@
 
 		<div class="swiper-pages swiper-container TabSwiperPages">
 			<div class="swiper-wrapper">
-
 				<div id="tab1" class="active swiper-slide swiper-slide-visible swiper-slide-active">
 					<!--<ul class="pricenews_list">
 									<li class="nomoral">
@@ -139,11 +138,11 @@
 </template>
 
 <script>
-	import scoke from '../scoke.vue';
+	import InitPage from '../components/SwiperInit.vue';
 	export default {
 		methods: {
 			pageInit: function() {
-				scoke.SwiperInit();
+				InitPage.SwiperInit();
 			}
 		}
 	}

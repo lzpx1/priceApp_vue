@@ -1,6 +1,6 @@
 <template>
 	<f7-page no-tabbar navbar-fixed id="Farm_food">
-		<f7-navbar>
+		<f7-navbar v-if="$theme.ios">
 			<f7-nav-left sliding>
 				<a href="#" class="back link">
 					<i class="iconfont icon-zuo icon-back"></i>
@@ -32,133 +32,6 @@
 			</div>
 			<div class="col-75 searchbar-found" id="search-list">
 				<ul class="row no-gutter">
-					<!--<li class="col-33">
-						<f7-link href="/Farm_foodDetail/" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</f7-link>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘粥</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>
-					<li class="col-33">
-						<a href="Farm_foodDetail.html" class="item-title">
-							<img src="../../static/food.png" />
-							<p>油粘米</p>
-						</a>
-					</li>-->
-					
 					<li v-for="item in DetailList" class="col-33">
 						<f7-link href="/Farm_foodDetail/" class="item-title">
 							<img :src="item.Url">
@@ -174,7 +47,7 @@
 </template>
 
 <script>
-	import SearchBar from "./SearchBar"
+	import SearchBar from "../components/SearchBar"
 	export default {
 		data: function(){
 			return {
