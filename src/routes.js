@@ -14,6 +14,17 @@ export default [
   {
       path: '/Price_news/',
       component: require('./pages/Price_news.vue')
+  },
+  {
+      path: '/PriceWarning/',
+      component: require('./pages/PriceWarning.vue')
+  },
+  {
+      path: '/Big_Commodity/',
+      component: require('./pages/Big_Commodity.vue')
+  },
+  {
+      path: '/mail_message/',
+      component: require('./pages/mail_message.vue')
   }
-  
 ]

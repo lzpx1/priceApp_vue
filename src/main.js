@@ -26,10 +26,9 @@ import Routes from './routes.js'
 
 // Import App Component
 import App from './app'
-
+import store from './store'
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue)
-
 // Init App
 var app = new Vue({
   el: '#app',
@@ -41,6 +40,7 @@ var app = new Vue({
     // material: true,
     routes: Routes,
   },
+  store,
   // Register App Component
   components: {
     app: App
