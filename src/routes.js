@@ -26,5 +26,21 @@ export default [
   {
       path: '/mail_message/',
       component: require('./pages/mail_message.vue')
+  },
+  {
+      path: '/mail_list/',
+      component: require('./pages/mail_list.vue')
+  },
+  {
+      path: '/aboutOur/',
+      component: require('./pages/aboutOur.vue')
+  },
+  {
+      path: '/Company/',
+      component: require('./pages/Company.vue')
+  },
+  {
+      path: '/index-woDetail/',
+      component: require('./pages/index-woDetail.vue')
   }
 ]
