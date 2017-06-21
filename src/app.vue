@@ -6,10 +6,10 @@
 
 		<!-- Main Views -->
 		<f7-views tabs>
-			<f7-view id="index" tab active main>
+			<f7-view id="index" tab active main data-page='index'>
 				<!-- Pages -->
 				<f7-pages>
-					<f7-page navbar-fixed toolbar-fixed >
+					<f7-page navbar-fixed toolbar-fixed>
 						<!-- Material Theme Navbar -->
 						<!-- iOS Theme Navbar -->
 						<f7-navbar v-if="$theme.ios">
@@ -122,8 +122,7 @@
 								</a>
 							</div>
 						</div>
-						
-						
+
 						<!--区域选择-->
 						<SelectArea></SelectArea>
 						<!--结束-->
@@ -132,7 +131,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Task" tab>
+			<f7-view id="index-Task" tab data-page='index-Task'>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -158,173 +157,173 @@
 						</div>
 						<div class="content-block taskBox">
 							<div class="tabs">
-									<!--待审核-->
-									<div id="tab1" class="tab active">
-										<div class="taskList">
-											<ul>
-												<li>
-													<a href="checkTask/TaskOverview.html" class="row no-gutter">
-														<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报（审核者）</h3>
-															<p class="col-50">实审/应审：<span>0/1</span></p>
-															<p class="col-50">实审/应审：<span>1/1</span></p>
-															<p>剩余时间：<span>3小时39分</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="task/TaskWrite.html" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报（填报者）</h3>
-															<p class="col-50">实审/应审：<span>0/1</span></p>
-															<p class="col-50">实审/应审：<span>1/1</span></p>
-															<p>剩余时间：<span>3小时39分</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!--待填报-->
-									<div id="tab2" class="tab">
-										<div class="taskList taskLine-3">
-											<ul>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>状态：<span>未完成</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>状态：<span>未完成</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>状态：<span>未完成</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>状态：<span>未完成</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>状态：<span>未完成</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!--审核中-->
-									<div id="tab3" class="tab">
-										<div class="taskList taskLine-2">
-											<ul>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报222</h3>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!--已退回-->
-									<div id="tab4" class="tab">
-										<div class="taskList">
-											<ul>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p class="col-50">实审/应审：<span>0/1</span></p>
-															<p class="col-50">实审/应审：<span>1/1</span></p>
-															<p>剩余时间：<span>3小时39分</span></p>
-															<p>报告期：<span>2016-12-12（第139期）</span></p>
-														</div>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!--已完成-->
-									<div id="tab5" class="tab">
-										<div class="taskList taskLine-3">
-											<ul>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报</h3>
-															<p>报告期：<span>2016-12-12</span></p>
-															<p>完成时间：<span>2016-12-12 11:21</span></p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="#" class="row no-gutter">
-														<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-														<div class="row col-80">
-															<h3>广东国际大宗商品价格监测日报222</h3>
-															<p>报告期：<span>2016-12-12</span></p>
-															<p>完成时间：<span>2016-12-12 11:21</span></p>
-														</div>
-													</a>
-												</li>
-											</ul>
-										</div>
+								<!--待审核-->
+								<div id="tab1" class="tab active">
+									<div class="taskList">
+										<ul>
+											<li>
+												<a href="checkTask/TaskOverview.html" class="row no-gutter">
+													<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报（审核者）</h3>
+														<p class="col-50">实审/应审：<span>0/1</span></p>
+														<p class="col-50">实审/应审：<span>1/1</span></p>
+														<p>剩余时间：<span>3小时39分</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="task/TaskWrite.html" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报（填报者）</h3>
+														<p class="col-50">实审/应审：<span>0/1</span></p>
+														<p class="col-50">实审/应审：<span>1/1</span></p>
+														<p>剩余时间：<span>3小时39分</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+										</ul>
 									</div>
 								</div>
+								<!--待填报-->
+								<div id="tab2" class="tab">
+									<div class="taskList taskLine-3">
+										<ul>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>状态：<span>未完成</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>状态：<span>未完成</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>状态：<span>未完成</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>状态：<span>未完成</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>状态：<span>未完成</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!--审核中-->
+								<div id="tab3" class="tab">
+									<div class="taskList taskLine-2">
+										<ul>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报222</h3>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!--已退回-->
+								<div id="tab4" class="tab">
+									<div class="taskList">
+										<ul>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p class="col-50">实审/应审：<span>0/1</span></p>
+														<p class="col-50">实审/应审：<span>1/1</span></p>
+														<p>剩余时间：<span>3小时39分</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!--已完成-->
+								<div id="tab5" class="tab">
+									<div class="taskList taskLine-3">
+										<ul>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报</h3>
+														<p>报告期：<span>2016-12-12</span></p>
+														<p>完成时间：<span>2016-12-12 11:21</span></p>
+													</div>
+												</a>
+											</li>
+											<li>
+												<a href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+													<div class="row col-80">
+														<h3>广东国际大宗商品价格监测日报222</h3>
+														<p>报告期：<span>2016-12-12</span></p>
+														<p>完成时间：<span>2016-12-12 11:21</span></p>
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 						</div>
 
 						<!--Page Content End-->
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Search" tab>
+			<f7-view id="index-Search" tab data-page='index-Search'>
 
 				<!-- Pages -->
 				<f7-pages>
@@ -355,8 +354,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Wo" tab>
-
+			<f7-view id="index-Wo" tab data-page='index-Wo'>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -380,7 +378,7 @@
 								<div class="list-block">
 									<ul>
 										<li>
-											<a href="index-woDetail.html" class="item-link item-content">
+											<f7-link href="/index-woDetail/" class="item-link item-content">
 												<div class="item-media">
 													<div class="navbar-inner-img"><img src="../static/images.png" alt=""></div>
 												</div>
@@ -389,7 +387,7 @@
 													<p class="userCompany">广东省监测中心</p>
 
 												</div>
-											</a>
+											</f7-link>
 										</li>
 									</ul>
 								</div>
@@ -409,6 +407,7 @@
 													<div class="user-box-btn">点击登录</div>
 												</div>
 											</a>
+											
 										</li>
 									</ul>
 								</div>
@@ -421,12 +420,12 @@
 							<div class="list-block">
 								<ul>
 									<li>
-										<a href="Company.html" class="item-link item-content a-width">
+										<f7-link href="/Company/" class="item-link item-content a-width">
 											<div class="item-media"><i class="iconfont icon-shigongdanweisel color-dblue"></i></div>
 											<div class="item-inner">
 												<div class="item-title">定点单位</div>
 											</div>
-										</a>
+										</f7-link>
 									</li>
 									<li>
 										<a href="InvestigateFill.html" class="item-link item-content a-width">
@@ -462,12 +461,12 @@
 						<div class="list-block">
 							<ul>
 								<li>
-									<a href="javascript:void(0)" class="item-link item-content a-width">
+									<f7-link href="/aboutOur/" class="item-link item-content a-width">
 										<div class="item-media"><i class="iconfont icon-guanyuwomen color-dorange"></i></div>
 										<div class="item-inner">
 											<div class="item-title">关于我们</div>
 										</div>
-									</a>
+									</f7-link>
 								</li>
 							</ul>
 						</div>
@@ -477,7 +476,7 @@
 				</f7-pages>
 			</f7-view>
 			<f7-toolbar tabbar labels>
-				<f7-link :icon="classObject0"  text="首页" tab-link="#index" active @click='changeIcon(0)'></f7-link>
+				<f7-link :icon="classObject0" text="首页" tab-link="#index" active @click='changeIcon(0)'></f7-link>
 				<f7-link :icon="classObject1" text="任务" tab-link="#index-Task" @click='changeIcon(1)'></f7-link>
 				<f7-link :icon="classObject2" text="查询" tab-link="#index-Search" @click='changeIcon(2)'></f7-link>
 				<f7-link :icon="classObject3" text="我的" tab-link="#index-Wo" @click='changeIcon(3)'></f7-link>
@@ -491,22 +490,22 @@
 <script>
 	import AreaBtn from "./components/AreaBtn";
 	import SelectArea from "./components/selectArea";
-	
+
 	export default {
-		data() { 
+		data() {
 			return {
-				bgStyle:{
+				bgStyle: {
 					background: "url(" + require("./assets/bg.png") + ") no-repeat",
-					backgroundSize:'100% 100%'
+					backgroundSize: '100% 100%'
 				},
-				classObject0 : 'iconfont icon-shouye',
-				classObject1 : 'iconfont icon-renwu2',
-				classObject2 : 'iconfont icon-chaxun2',
-				classObject3 : 'iconfont icon-wo1',
-				Area:"广州",
-				rule:false,
+				classObject0: 'iconfont icon-shouye',
+				classObject1: 'iconfont icon-renwu2',
+				classObject2: 'iconfont icon-chaxun2',
+				classObject3: 'iconfont icon-wo1',
+				Area: "广州",
+				rule: false,
 				AreaDisplay: "none",
-				AreaYD: ["广州","深圳","珠海","佛山","江门","中山","东莞","惠州","肇庆"]
+				AreaYD: ["广州", "深圳", "珠海", "佛山", "江门", "中山", "东莞", "惠州", "肇庆"]
 			}
 		},
 		methods: {
@@ -537,8 +536,8 @@
 						this.classObject3 = 'iconfont icon-womian'
 						break;
 				}
-			}		
+			}
 		},
-		components: { AreaBtn , SelectArea }
+		components: { AreaBtn, SelectArea }
 	}
 </script>
