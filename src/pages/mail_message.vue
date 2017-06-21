@@ -8,9 +8,7 @@
 			</f7-nav-left>
 			<f7-nav-center sliding>消息</f7-nav-center>
 			<f7-nav-right>
-				<a href="mail_list.html">
-				    <span>通讯录</span>
-				</a>
+				<f7-link href="/mail_list/"><span>通讯录</span></f7-link>
 			</f7-nav-right>
 		</f7-navbar>
 		<!-- Search bar -->
