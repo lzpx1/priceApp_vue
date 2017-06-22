@@ -118,7 +118,7 @@
 .taskFileBox p{margin-bottom: .2rem;}
 .taskFileBox .msg{margin-top:.5rem;padding: .5rem;border: 1px solid #eaeaea;  font-size: .8rem;  min-height: 20rem;  border-radius: 5px;}
 /*地区选择*/
-.areaSelect, .filtrateBox{ display: none; position: absolute;  top: 44px;  left: 0;  right: 0;  bottom: 0;  z-index: 200;   font-size: .8rem;  color: #333; background: rgba(0,0,0,0.4);overflow: hidden;-webkit-animation:opacityA .3s;animation: opacityA .3s; }
+.areaSelect, .filtrateBox{position: absolute;  top: 44px;  left: 0;  right: 0;  bottom: 0;  z-index: 200;   font-size: .8rem;  color: #333; background: rgba(0,0,0,0.4);overflow: hidden;-webkit-animation:opacityA .3s;animation: opacityA .3s; }
 .areaSelect::after, .filtrateBox::after{content:"点击阴影关闭弹窗";position:absolute;top: 25rem;left:0;right:0;color: #fff;font-size: 1rem;text-align: center;}
 .areaSelect .box, .filtrateBox .box{padding-left:2rem;background: #fff;height: 22rem;overflow: hidden;-webkit-animation:Atranslate3d .5s;animation: Atranslate3d .5s;}
 .areaSelect .line{  padding: 1rem 0;  border-bottom: 1px solid #eaeaea;  }
