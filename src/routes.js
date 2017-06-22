@@ -42,5 +42,61 @@ export default [
   {
       path: '/index-woDetail/',
       component: require('./pages/index-woDetail.vue')
+  },
+  {
+      path: '/TaskOverview/',
+      component: require('./pages/TaskOverview.vue')
+  },
+  {
+      path: '/TaskTable/',
+      component: require('./pages/TaskTable.vue')
+  },
+  {
+      path: '/TaskFile/',
+      component: require('./pages/TaskFile.vue')
+  },
+  {
+      path: '/TaskWrite/',
+      component: require('./pages/TaskWrite.vue')
+  },
+  {
+      path: '/mail_list_chat/',
+      component: require('./pages/mail_list_chat.vue')
+  },
+  {
+      path: '/SearchIndex/',
+      component: require('./pages/SearchIndex.vue')
+  },
+  {
+      path: '/Macro_Judgment/',
+      component: require('./pages/Macro_Judgment.vue')
+  },
+  {
+      path: '/task_monitoring/',
+      component: require('./pages/task_monitoring.vue')
+  },
+  {
+      path: '/Report_pull/',
+      component: require('./pages/Report_pull.vue')
+  },
+  {
+      path: '/Macro_data/',
+      component: require('./pages/Macro_data.vue')
+  },
+  {
+      path: '/my_ToWork/',
+      component: require('./pages/my_ToWork.vue')
+  },
+  {
+      path: '/Notice/',
+      component: require('./pages/Notice.vue')
+  },
+  {
+	  path: '/News/',
+      component: require('./pages/News.vue')
+  },
+  {
+	  path: '/DataQuery/',
+      component: require('./pages/DataQuery.vue')
   }
 ]
