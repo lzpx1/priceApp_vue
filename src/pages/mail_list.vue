@@ -32,8 +32,8 @@
 				<ul>
 					<li class="list-group-title">A</li>
 					<li v-for='person in randomArray(PerList)' >
-						<a class="item-content" href="mail_list_chat.html">
-							<div class="item-media">
+						<f7-link href="/mail_list_chat/" class="clearfloat item-content">
+								<div class="item-media">
 								<span :class="person.color">{{person.name | splitName}}</span>
 							</div>
 							<div class="item-inner">
@@ -42,7 +42,8 @@
 									<p v-text='person.Company'></p>
 								</div>
 							</div>
-						</a>
+						</f7-link>
+						
 					</li>
 				</ul>
 			</div>

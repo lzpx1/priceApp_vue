@@ -1,5 +1,5 @@
 <template>
-	<f7-page navbar-fixed  no-tabbar id="PriceWarning" @page:beforeanimation="pageInit" @page:back = "pageInit">
+	<f7-page navbar-fixed  no-tabbar id="PriceWarning" >
 				<!--导航-->
 				<f7-navbar v-if="$theme.ios">
 					<div class="navbar-inner">
@@ -10,8 +10,10 @@
 						</f7-nav-left>
 				       <f7-nav-center sliding>价格预警</f7-nav-center> 
 				       <f7-nav-right>
-							<!--<span class="btnArea" @click="areaToChange"><span class="a-tackArea">{{Area}}</span><i class="iconfont icon-11"></i></span>-->
-				       		<AreaBtn></AreaBtn>
+							<span class="btnArea" @click="BtnChange">
+								<span class="a-tackArea">{{ defaultArea }}</span>
+								<i class="iconfont icon-11"></i>
+							</span>
 				       </f7-nav-right>
 				    </div>
 				</f7-navbar>
@@ -255,55 +257,19 @@
 					</div>
 
 				<!--区域选择-->
-				<!--<div class="areaSelect" slot="fixed"  :style = "{display: AreaDisplay}" @click = 'areaToChange'>
-					<div class="box" @click.stop>
-						<div class="line">
-							<h3>珠三角</h3>
-							<ul>
-								<li v-for="AreaName in AreaYD" @click = 'selectArea(AreaName)'>{{AreaName}}</li>
-							</ul>
-						</div>
-						<div class="line">
-							<h3>粤东</h3>
-							<ul>
-								<li>汕头</li>
-								<li>潮州</li>
-								<li>揭阳</li>
-								<li>汕尾</li>
-							</ul>
-						</div>
-						<div class="line">
-							<h3>粤西</h3>
-							<ul>
-								<li>湛江</li>
-								<li>茂名</li>
-								<li>阳江</li>
-								<li>云浮</li>
-							</ul>
-						</div>
-						<div class="line">
-							<h3>粤北</h3>
-							<ul>
-								<li>韶关</li>
-								<li>清远</li>
-								<li>河源</li>
-								<li>梅州</li>
-							</ul>
-						</div>
-					</div>
-				</div>-->
-				<SelectArea slot="fixed"></SelectArea>
+				<SelectArea  slot='fixed' :AreaDisplay= "AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
 				<!--结束-->
 	</f7-page>
 </template>
 <script>
 	import SearchBar from "../components/SearchBar";
-	import AreaBtn from "../components/AreaBtn";
 	import SelectArea from "../components/selectArea";
 	export default {
 		data(){
 			return {
 				rule:false,
+				defaultArea: "广州",
+				AreaDisplay: "none",
 			}
 		},
 		methods:{
@@ -318,10 +284,18 @@
 					this.rule =!this.rule;
 				}
 			},
-			pageInit:function(){
-				this.$store.commit('initArea');
+			BtnChange: function(){
+				if(this.AreaDisplay == 'none'){
+					this.AreaDisplay = 'flex'
+				} else{
+					this.AreaDisplay = 'none'
+				}
+			},
+			BtnValue:function(value){
+				this.defaultArea = value;
+				this.BtnChange();
 			}
 		},
-		components: { SearchBar , AreaBtn , SelectArea}
+		components: { SearchBar , SelectArea}
 	}
 </script>

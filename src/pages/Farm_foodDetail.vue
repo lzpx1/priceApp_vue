@@ -8,7 +8,10 @@
 			</f7-nav-left>
 			<f7-nav-center sliding>农贸食品</f7-nav-center>
 			<f7-nav-right sliding>
-				<span class="btnArea">广州<i class="iconfont icon-11"></i></span>
+				<span class="btnArea" @click="BtnChange">
+					<span class="a-tackArea">{{ defaultArea }}</span>
+					<i class="iconfont icon-11"></i>
+				</span>
 			</f7-nav-right>
 		</f7-navbar>
 		<div class="detail_box">
@@ -74,13 +77,36 @@
 
 			</ul>
 		</div>
-
+		
+		<!--区域选择-->
+		<SelectArea  slot='fixed' :AreaDisplay= "AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
+		<!--结束-->
 	</f7-page>
 
 </template>
 
 <script>
+	import SelectArea from "../components/selectArea";
 	export default {
-
+		data(){
+			return {
+				defaultArea: "广州",
+				AreaDisplay: "none",
+			}
+		},
+		methods:{
+			BtnChange: function(){
+				if(this.AreaDisplay == 'none'){
+					this.AreaDisplay = 'flex'
+				} else{
+					this.AreaDisplay = 'none'
+				}
+			},
+			BtnValue:function(value){
+				this.defaultArea = value;
+				this.BtnChange();
+			}
+		},
+		components: { SelectArea }
 	}
 </script>

@@ -53,34 +53,34 @@
 					</a>
 				</li>
 				<li class="col-25">
-					<a href="Macro_Judgment.html" class="item-application">
+					<f7-link href="/Macro_Judgment/">
 						<i class="iconfont icon-hongguanyanpan color-dred"></i>
 						<p>宏观研判</p>
-					</a>
+					</f7-link>
 				</li>
 				<li class="col-25">
-					<a href="Macro_data.html" class="item-application">
+					<f7-link href="/Macro_data/" class="item-application">
 						<i class="iconfont icon-hongguanshuju color-dred"></i>
 						<p>宏观数据</p>
-					</a>
+					</f7-link>
 				</li>
 				<li class="col-25">
-					<a href="task.html" class="item-application">
+					<f7-link href="/task_monitoring/" class="item-application">
 						<i class="iconfont icon-renwujiankong color-dblue"></i>
 						<p>任务监控</p>
-					</a>
+					</f7-link>
 				</li>
 				<li class="col-25">
-					<a href="my_ToWork.html" class="item-application">
+					<f7-link href="/my_ToWork/" class="item-application">
 						<i class="iconfont icon-wodedaiban color-dorange"></i>
 						<p>我的待办</p>
-					</a>
+					</f7-link>
 				</li>
 				<li class="col-25">
-					<a href="Notice.html" class="item-application">
+					<f7-link href="/Notice/" class="item-application">
 						<i class="iconfont icon-jiageyujing color-dgreen"></i>
 						<p>通知公告</p>
-					</a>
+					</f7-link>
 				</li>
 			</ul>
 		</div>

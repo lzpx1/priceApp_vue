@@ -17,7 +17,7 @@
 		<!-- Search-through list -->
 		<ul class="message_list searchbar-found" id="search-list">
 						<li>
-							<a href="#" class="clearfloat item-title">
+							<f7-link href="/mail_list_chat/" class="clearfloat item-title">
 								<div class="Ticon fleft">
 									<i class="iconfont icon-wo2"></i>
 								</div>
@@ -30,7 +30,7 @@
 										广东省国际大宗商品价格监测广东省国际大宗商品价格监测
 									</p>
 								</div>
-							</a>
+							</f7-link>
 						</li>
 						<li>
 							<a href="#" class="clearfloat item-title">
