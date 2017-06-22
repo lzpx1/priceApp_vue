@@ -1,6 +1,6 @@
 <template>
 	<!--区域选择-->
-	<div class="areaSelect"  :style="{display: Area.AreaDisplay}" @click='areaToChange'>
+	<div class="areaSelect" :style="{display: AreaDisplay}" @click="areaToChange">
 		<div class="box" @click.stop>
 			<div class="line">
 				<h3>珠三角</h3>
@@ -41,22 +41,27 @@
 </template>
 
 <script>
-	import{ mapState } from 'vuex' 
+//	import{ mapState } from 'vuex' 
 	export default { 
 		data(){
 			return {
 				AreaYD: ["广州","深圳","珠海","佛山","江门","中山","东莞","惠州","肇庆"]
 			}
 		},
+		props: ['AreaDisplay','defaultArea'],
 		computed: { 
-			...mapState(['Area']) 
+//			...mapState(['Area']) 
 		}, 
 		methods: { 
-			selectArea(value) { 
-				this.$store.dispatch('A_SelectArea',value); 
+//			selectArea(value) { 
+//				this.$store.dispatch('A_SelectArea',value); 
+//			},
+			areaToChange: function(){
+//				this.$store.commit('areaToChange');
+				this.$emit('areaToChange');
 			},
-			areaToChange(){
-				this.$store.commit('areaToChange'); 
+			selectArea:function(value){
+				this.$emit('selectArea',value);
 			}
 		} 
 	}
