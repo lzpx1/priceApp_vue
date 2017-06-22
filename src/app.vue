@@ -6,7 +6,7 @@
 
 		<!-- Main Views -->
 		<f7-views tabs>
-			<f7-view id="index" tab active main data-page='index'>
+			<f7-view id="index" tab active main >
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -27,13 +27,14 @@
 						<div class="row c_con no-gutter">
 							<div class="col-20">
 								<div class="c_region">
-									<AreaBtn></AreaBtn>
+									<span class="btnArea" @click="BtnChange">
+										<span class="a-tackArea">{{ defaultArea }}</span>
+										<i class="iconfont icon-11"></i>
+									</span>
 								</div>
 							</div>
 							<div class="col-80">
-								<a href="SearchIndex.html">
-									<div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div>
-								</a>
+								<f7-link href="/SearchIndex/"><div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div></f7-link>
 							</div>
 						</div>
 						<!--8个按钮-->
@@ -98,7 +99,7 @@
 								<a class="right" href="Price_news.html">全部</a>
 							</div>
 							<div class="col-100 c_margin-bottom">
-								<a href="Notice_News.html">
+								<f7-link href="/News/">
 									<div class="row no-gutter">
 										<div class="col-25"><img src="../static/11.png" /></div>
 										<div class="col-75">
@@ -108,7 +109,7 @@
 											<p class="right">2016-12-11</p>
 										</div>
 									</div>
-								</a>
+								</f7-link>
 								<a href="Notice_News.html">
 									<div class="row no-gutter">
 										<div class="col-25"><img src="../static/11.png" /></div>
@@ -124,14 +125,15 @@
 						</div>
 
 						<!--区域选择-->
-						<SelectArea></SelectArea>
+						<SelectArea  :AreaDisplay= "AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
 						<!--结束-->
+						
 						<!-- page Content End-->
 
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Task" tab data-page='index-Task'>
+			<f7-view id="index-Task" tab >
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -162,7 +164,7 @@
 									<div class="taskList">
 										<ul>
 											<li>
-												<a href="checkTask/TaskOverview.html" class="row no-gutter">
+												<f7-link href="/TaskOverview/"  class="row no-gutter">
 													<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
 														<h3>广东国际大宗商品价格监测日报（审核者）</h3>
@@ -171,10 +173,10 @@
 														<p>剩余时间：<span>3小时39分</span></p>
 														<p>报告期：<span>2016-12-12（第139期）</span></p>
 													</div>
-												</a>
+												</f7-link>
 											</li>
 											<li>
-												<a href="task/TaskWrite.html" class="row no-gutter">
+												<f7-link href="/TaskWrite/"  class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
 													<div class="row col-80">
 														<h3>广东国际大宗商品价格监测日报（填报者）</h3>
@@ -183,7 +185,7 @@
 														<p>剩余时间：<span>3小时39分</span></p>
 														<p>报告期：<span>2016-12-12（第139期）</span></p>
 													</div>
-												</a>
+												</f7-link>
 											</li>
 										</ul>
 									</div>
@@ -323,8 +325,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Search" tab data-page='index-Search'>
-
+			<f7-view id="index-Search" tab >
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed no-page-content>
@@ -333,16 +334,15 @@
 							<f7-nav-left></f7-nav-left>
 							<f7-nav-center sliding>查询</f7-nav-center>
 							<f7-nav-right>
-
 							</f7-nav-right>
 						</f7-navbar>
 						<!-- Page Content -->
 						<div class="page-content c_body" :style="bgStyle">
 							<div class="c_seeks">
-								<a href="DataQuery.html">
+								<f7-link href="/DataQuery/">
 									<i class="iconfont icon-shujuchaxun_ green"></i>
 									<p>数据查询</p>
-								</a>
+								</f7-link>
 							</div>
 							<div class="c_seeks">
 								<a href="#">
@@ -354,7 +354,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Wo" tab data-page='index-Wo'>
+			<f7-view id="index-Wo" tab >
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -488,7 +488,6 @@
 </template>
 
 <script>
-	import AreaBtn from "./components/AreaBtn";
 	import SelectArea from "./components/selectArea";
 
 	export default {
@@ -502,10 +501,8 @@
 				classObject1: 'iconfont icon-renwu2',
 				classObject2: 'iconfont icon-chaxun2',
 				classObject3: 'iconfont icon-wo1',
-				Area: "广州",
-				rule: false,
+				defaultArea: "广州",
 				AreaDisplay: "none",
-				AreaYD: ["广州", "深圳", "珠海", "佛山", "江门", "中山", "东莞", "惠州", "肇庆"]
 			}
 		},
 		methods: {
@@ -536,8 +533,19 @@
 						this.classObject3 = 'iconfont icon-womian'
 						break;
 				}
+			},
+			BtnChange: function(){
+				if(this.AreaDisplay == 'none'){
+					this.AreaDisplay = 'flex'
+				} else{
+					this.AreaDisplay = 'none'
+				}
+			},
+			BtnValue:function(value){
+				this.defaultArea = value;
+				this.BtnChange();
 			}
 		},
-		components: { AreaBtn, SelectArea }
+		components: { SelectArea }
 	}
 </script>
