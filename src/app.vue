@@ -49,7 +49,7 @@
 								<f7-link href="/Big_Commodity/"><i class="iconfont icon-dazongshangpin yellow"></i><span>大宗商品</span></f7-link>
 							</div>
 							<div class="col-25">
-								<a href="#"><i class="iconfont icon-gongyechanpin green"></i><span>工业产品</span></a>
+								<a href="#" class="open-login-screen"><i class="iconfont icon-gongyechanpin green"></i><span>工业产品</span></a>
 							</div>
 							<div class="col-25">
 								<f7-link href="/Price_news/"><i class="iconfont icon-jiagezixun yellow"></i><span>价格资讯</span></f7-link>
@@ -481,7 +481,49 @@
 				<f7-link :icon="classObject2" text="查询" tab-link="#index-Search" @click='changeIcon(2)'></f7-link>
 				<f7-link :icon="classObject3" text="我的" tab-link="#index-Wo" @click='changeIcon(3)'></f7-link>
 			</f7-toolbar>
-
+			<f7-login-screen opened>
+			  <!-- Login Screen content goes here -->
+			   <f7-view>
+			    <f7-pages>
+			      <f7-page login-screen no-page-content >
+				       <div class="page-content login-screen-content d-login">
+				<div class="login-logo">
+					<img src="../static/images.png" alt="logo"/>
+					<p>广东价格</p>
+				</div>
+				<form>
+					<div class="list-block">
+						<ul>
+							<li class="item-content">
+								<div class="item-media"><i class="iconfont">&#xe606;</i></div>
+								<div class="item-inner">
+									<div class="item-input">
+										<input type="text" v-model="User.loginName" name="username" placeholder="请输入用户名">
+									</div>
+								</div>
+							</li>
+							<li class="item-content">
+								<div class="item-media"><i class="iconfont">&#xe629;</i></div>
+								<div class="item-inner">
+									<div class="item-input">
+										<input type="password" v-model="User.loginPwd"  name="password" placeholder="请输入登录密码">
+									</div>
+								</div>
+							</li>
+						</ul>
+						<input class="button" type="submit" name="submit" value="登录">
+					</div>
+					<div class="list-block">
+						<div class="list-block-label">
+							<p><a href="#" class="close-login-screen">Close Login Screen</a></p>
+						</div>
+					</div>
+				</form>
+				<div class="copyright">广东省价格监测中心</div>
+			</div></f7-page>
+			    </f7-pages>
+			  </f7-view>
+			</f7-login-screen>
 		</f7-views>
 
 	</div>
@@ -503,6 +545,11 @@
 				classObject3: 'iconfont icon-wo1',
 				defaultArea: "广州",
 				AreaDisplay: "none",
+				User: {
+					loginName: '11',
+					loginPwd: '22'
+				}
+				
 			}
 		},
 		methods: {

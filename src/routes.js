@@ -98,5 +98,9 @@ export default [
   {
 	  path: '/DataQuery/',
       component: require('./pages/DataQuery.vue')
+  },
+  {
+	  path: '/Search_Commodity/',
+      component: require('./pages/Search_Commodity.vue')
   }
 ]
