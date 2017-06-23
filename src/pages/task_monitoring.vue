@@ -140,7 +140,7 @@
 
 <script>
 	import SelectArea from "../components/selectArea";
-	import InitPage from '../components/SwiperInit.vue';
+	import InitPage from '../components/PageInit.vue';
 	export default {
 		data(){
 			return {

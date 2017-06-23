@@ -20,7 +20,7 @@
 					<div class="taskList">
 						<ul>
 							<li>
-								<f7-link href="/DataQuery/" class="row">
+								<f7-link href="/Search_Commodity/" class="row">
 									<div class="col-20"><img src="../../static/food.png"></div>
 									<div class="row col-80">
 										<h3>油粘米 <samp>（新鲜一级优质）</samp></h3>

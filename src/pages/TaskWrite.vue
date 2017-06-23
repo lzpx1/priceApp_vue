@@ -274,7 +274,7 @@
 </template>
 
 <script>
-	import InitPage from '../components/SwiperInit.vue';
+	import InitPage from '../components/PageInit.vue';
 	export default {
 		methods: {
 			pageInit: function() {
