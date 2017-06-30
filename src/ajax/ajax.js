@@ -77,7 +77,6 @@ export default {
     /**
      * 用户退出
      */
-<<<<<<< HEAD
     exitLogin(params){
     	return fetch('/framework/signOutUser' , { token:params } );
     },
@@ -87,8 +86,6 @@ export default {
     /**
      * 用户退出
      */
-=======
->>>>>>> branch 'master' of https://github.com/lzpx1/priceApp_vue.git
     exitLogin(params){return fetch('/framework/signOutUser' , { token:params } );},
     /**
      * 获取任务填报
