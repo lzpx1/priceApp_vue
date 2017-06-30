@@ -73,8 +73,25 @@ export default {
 			return fetch('/framework/loginAppUser' , { loginName:params.loginName,password:enPassword,onlyCode:res.onlyCode} );			
         });
     },
-    exitLogin(params){
-    	return fetch('/framework/signOutUser' , { token:params } );
-    }
+    /**
+     * 用户退出
+     */
+    exitLogin(params){return fetch('/framework/signOutUser' , { token:params } );},
+    /**
+     * 获取任务填报
+     */
+    taskListWrite(params){return fetch('/Fill/findListFill' , params)},
+    /**
+     * 获取任务退回
+     */
+    taskListReturn(params){return fetch('/Fill/findReturnList' , params)},
+    /**
+     * 获取任务完成
+     */
+    taskListCompleted(params){return fetch('/Fill/findCompletedList' , params)},
+    /**
+     * 获取个人信息
+     */
+    personalInformation(params){return fetch('/Personal/findInformation' , params)}
 }
 
