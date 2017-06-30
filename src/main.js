@@ -34,6 +34,10 @@ import store from './store/store'
 
 Vue.use(Framework7Vue)
 
+import ajax from './ajax/ajax.js'
+
+Vue.prototype.$ajax = ajax;
+
 // Init App
 var app = new Vue({
   el: '#app',
@@ -53,5 +57,4 @@ var app = new Vue({
   }
 });
 
-import ajax from './ajax/ajax.js'
-Vue.prototype.$ajax = ajax;
+
