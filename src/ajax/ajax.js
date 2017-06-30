@@ -1,7 +1,7 @@
 import axios from 'axios'
-
+import qs from 'qs'
 // axios 配置
-axios.defaults.timeout = 15000;
+axios.defaults.timeout = 30000;
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
@@ -9,34 +9,52 @@ axios.defaults.baseURL = 'http://192.168.1.251:8034/warnapps/app';
 
 //POST传参序列化
 axios.interceptors.request.use((config) => {
+	if(config.method  === 'post'){
+        config.data = qs.stringify(config.data);
+	}
+	f7.showIndicator();
 	console.log("start ajax");
     return config;
 },(error) =>{
-	console.log("error")
     return Promise.reject(error);
 });
 
 //返回状态判断
 axios.interceptors.response.use((res) =>{
-//  if(!res.data.success){
-//  	return 
-//  }
-    return res;
+	f7.hideIndicator();
+    return res.data;
 }, (error) => {
-	f7.alert("网络错误！");
+	f7.hideIndicator();
+	if(error.toString().indexOf('500') > 0){
+		f7.alert("服务器错误:500");
+	}else{
+		f7.alert("网络错误");
+	}
+	return Promise.reject(error);
 });
 
-export function fetch(url, params) {
-    return new Promise((resolve, reject) => {
-        axios.get(url, params)
-            .then(response => {
-                resolve(response);
-            }).catch((error) => {
-               reject(error)
-            })
-    })
+function fetch(url, params) {
+	return new Promise((resolve, reject) => {
+	    axios.post(url, params)
+	        .then(response => {
+	            resolve(response);
+	        }).catch(error => {
+	            reject(error) ;
+	        })
+	})
 }
-
+function fetchGet(url,params) {
+	return new Promise((resolve, reject) => {
+	    axios.get(url,{
+			params:params
+			})
+	        .then(response => {
+	            resolve(response);
+	        }).catch(error => {
+	            reject(error) ;
+	        })
+	})
+}
 export default {
     /**
      * 用户登录
@@ -46,24 +64,17 @@ export default {
         	
         	var rsaKey = new RSAKey();
 
-			rsaKey.setPublic(b64tohex(res.data.modulus), b64tohex(res.data.exponent));
+			rsaKey.setPublic(b64tohex(res.modulus), b64tohex(res.exponent));
 	
 			var enPassword = hex2b64(rsaKey.encrypt(params.loginPwd));
 			
 			console.log(enPassword);
 			
-			var Url ="/framework/loginAppUser?loginName=";
-				Url += params.loginName + "&password=" + enPassword + "&onlyCode=" + res.data.onlyCode;
-	
-			return fetch(Url);			
+			return fetch('/framework/loginAppUser' , { loginName:params.loginName,password:enPassword,onlyCode:res.onlyCode} );			
         });
+    },
+    exitLogin(params){
+    	return fetch('/framework/signOutUser' , { token:params } );
     }
 }
 
-
-
-
-//exports.install = function (Vue , options) {
-//
-//  Vue.prototype.ajax = Objajax
-//};
