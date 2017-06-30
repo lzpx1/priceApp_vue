@@ -25,9 +25,8 @@
 	    pages.params.control = nav;
 	};
 	function TimeInit(){
-		var myApp = new Framework7();
 		for(let i = 0; i<arguments.length;i++){
-			let myCalendar = myApp.calendar({
+			let myCalendar = f7.calendar({
 		   	 	input: arguments[i],
 		   	 	monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
 		   	 	dayNamesShort:['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
