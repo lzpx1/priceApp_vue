@@ -1,6 +1,6 @@
 <template>
 	<!-- App -->
-	<div id="app">
+	<div id="app" >
 		<!-- Statusbar -->
 		<f7-statusbar></f7-statusbar>
 
@@ -481,7 +481,7 @@
 				<f7-link :icon="classObject2" text="查询" tab-link="#index-Search" @click='changeIcon(2)'></f7-link>
 				<f7-link :icon="classObject3" text="我的" tab-link="#index-Wo" @click='changeIcon(3)'></f7-link>
 			</f7-toolbar>
-			<f7-login-screen opened>
+			<f7-login-screen>
 			  <!-- Login Screen content goes here -->
 			   <f7-view>
 			    <f7-pages>
@@ -511,7 +511,7 @@
 								</div>
 							</li>
 						</ul>
-						<input class="button" type="submit" name="submit" value="登录">
+						<input class="button" @click.prevent="login" type="submit" name="submit" value="登录">
 					</div>
 					<div class="list-block">
 						<div class="list-block-label">
@@ -524,14 +524,14 @@
 			    </f7-pages>
 			  </f7-view>
 			</f7-login-screen>
+	
 		</f7-views>
 
 	</div>
 </template>
 
 <script>
-	import SelectArea from "./components/selectArea";
-
+	import SelectArea from "./components/selectArea"
 	export default {
 		data() {
 			return {
@@ -546,12 +546,17 @@
 				defaultArea: "广州",
 				AreaDisplay: "none",
 				User: {
-					loginName: '11',
-					loginPwd: '22'
+					loginName: '',
+					loginPwd: ''
 				}
-				
 			}
 		},
+		mounted: function () {
+		    if(!localStorage.getItem('token')){
+		    	var myapp = new Framework7();
+		    	myapp.loginScreen();
+		    }
+	  	},
 		methods: {
 			changeIcon: function(index) {
 				switch(index) {
@@ -588,9 +593,26 @@
 					this.AreaDisplay = 'none'
 				}
 			},
-			BtnValue:function(value){
+			BtnValue: function(value){
 				this.defaultArea = value;
 				this.BtnChange();
+			},
+			login: function(){
+				if(this.User.loginName.trim() == '' || this.User.loginName == 'undefined'){
+					 f7.alert("用户名为空");
+				}else if(this.User.loginPwd.trim() == ''){
+					 f7.alert("密码为空");
+				} else{
+					this.$ajax.Login(this.User)
+	                .then(response => {
+	                	if('token' in response){
+	                		localStorage.setItem('token',response.token);
+	                		f7.closeModal();
+	                	} else if('msg' in response){
+	                		f7.alert(response.msg);
+	                	}
+	                })
+				}
 			}
 		},
 		components: { SelectArea }

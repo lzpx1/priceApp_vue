@@ -12,6 +12,7 @@ axios.interceptors.request.use((config) => {
 	if(config.method  === 'post'){
         config.data = qs.stringify(config.data);
 	}
+	console.log(config.data);
 	f7.showIndicator();
 	console.log("start ajax");
     return config;
@@ -76,6 +77,18 @@ export default {
     /**
      * 用户退出
      */
+<<<<<<< HEAD
+    exitLogin(params){
+    	return fetch('/framework/signOutUser' , { token:params } );
+    },
+    Savedata(params){
+    	return fetch('/support/temporarySave',params);
+    }
+    /**
+     * 用户退出
+     */
+=======
+>>>>>>> branch 'master' of https://github.com/lzpx1/priceApp_vue.git
     exitLogin(params){return fetch('/framework/signOutUser' , { token:params } );},
     /**
      * 获取任务填报
