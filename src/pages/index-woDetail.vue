@@ -31,6 +31,7 @@
 							<div class="item-media"><i class="iconfont icon-zuoji color-dorange"></i></div>
 							<div class="item-inner">
 								<div class="item-title">座机电话</div>
+								<div class="item-after">Another label</div>
 							</div>
 						</a>
 					</li>
@@ -71,7 +72,7 @@
 			</div>
 		</div>
 		<!--结束-->
-
+		<div class="exitLogin" @click="exit">退出登陆</div>
 		<!--结束-->
 	</f7-page>
 
@@ -83,7 +84,22 @@
 			return {}
 		},
 		filters: {},
-		methods: {},
+		methods: {
+			exit: function(){
+				var vm = this;
+				var Ntoken = localStorage.getItem('token');
+				this.$ajax.exitLogin(Ntoken).then(res =>{
+					
+					localStorage.removeItem('token');
+					f7.loginScreen();
+					setTimeout(function(){
+						vm.$router.back();
+					},1000);
+					
+				});
+				
+			}
+		},
 		components: {}
 	}
 </script>
