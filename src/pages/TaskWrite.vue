@@ -38,10 +38,10 @@
 												<p class="col-50 a-pre">上期：<span>3.45</span></p>
 												<p class="col-50">涨跌幅：<span class="color-dgreen">-23%</span></p>
 												<p class="col-50 a-current">本期：<input type="text" /></p>
-												<p class="col-50 d-details">详情<i class="iconfont">&#xe64a;</i></p>
+												<p class="col-50 d-details"  @click="showDetail">详情<i class="iconfont">&#xe64a;</i></p>
 											</div>
 										</a>
-										<div class="row taskDetails">
+										<div class="row taskDetails" :style="{display: detailShow}">
 											<p class="col-50">规格等级：新鲜一级</p>
 											<p class="col-50">计价单位：美元/吨</p>
 											<p class="col-50">全省均价：3.45元</p>
@@ -140,7 +140,7 @@
 						<p class="title">已填写</p>
 						<p class="text">可进行修改</p>
 					</div>
-					<div class="col-30 btn">暂存</div>
+					<div class="col-30 btn" @click = "SaveData">暂存</div>
 					<div class="col-30 btn">提交</div>
 				</div>
 				<div class="taskList" style="display: none">
@@ -276,9 +276,56 @@
 <script>
 	import InitPage from '../components/PageInit.vue';
 	export default {
+		data(){
+			return {
+				detailShow: 'none',
+				Pjson:{ 
+					"token":"",
+					"objectId":"2028",
+				    "taskDireId":"195",
+				    "taskReportedId":"37393",
+				    "dataList":[
+					        {
+					            "dataValue":"13.57",
+					            "firstAckValue":"110",
+					            "secondAckValue":"110",
+					            "lastAckValue":"",
+					            "indicatorId":"",
+					            "mercId":"8",
+					            "mercName":"晚籼米",
+					            "mercSpec":"优质",
+					            "unitGrade":"一等品",
+					            "unitName":"500克/元",
+					            "unitId":"38",
+					            "waveReason":"1",
+					            "waveReasonRemark":"超市促销",
+					            "dataValueLast":"118",
+					            "isProblem":"1",
+					            "isError":""
+					        }
+				    ],
+				}
+
+			}
+		},
 		methods: {
 			pageInit: function() {
 				InitPage.SwiperInit();
+			},
+			showDetail: function(){
+				if(this.detailShow == 'none'){
+					this.detailShow = 'flex'
+				} else{
+					this.detailShow = 'none'
+				}
+			},
+			SaveData: function(){
+				var token = localStorage.getItem('token');
+				this.Pjson.token = token ;
+				console.log(this.Pjson);
+				this.$ajax.Savedata(this.Pjson).then(res =>{
+					console.log(res);
+				})
 			}
 		}
 	}
