@@ -88,8 +88,7 @@
 			exit: function(){
 				var vm = this;
 				var Ntoken = localStorage.getItem('token');
-				this.$ajax.exitLogin(Ntoken).then(res =>{
-					
+				this.$ajax.exitLogin(Ntoken).then(res =>{		
 					localStorage.removeItem('token');
 					f7.loginScreen();
 					setTimeout(function(){

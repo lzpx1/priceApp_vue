@@ -12,7 +12,6 @@ axios.interceptors.request.use((config) => {
 	if(config.method  === 'post'){
         config.data = qs.stringify(config.data);
 	}
-	console.log(config.data);
 	f7.showIndicator();
 	console.log("start ajax");
     return config;
@@ -80,17 +79,19 @@ export default {
     exitLogin(params){
     	return fetch('/framework/signOutUser' , { token:params } );
     },
+   	 /**
+     * 暂存数据
+     */
     Savedata(params){
-    	return fetch('/support/temporarySave',params);
-    }
+    	return fetch('/support/temporarySave.do',params);
+    },
+    getInitForm(){
+    	return fetchGet('/getInitFormDataForObj.do');
+    },
     /**
-     * 用户退出
+     * 获取任务填报列表
      */
-    exitLogin(params){return fetch('/framework/signOutUser' , { token:params } );},
-    /**
-     * 获取任务填报
-     */
-    taskListWrite(params){return fetch('/Fill/findListFill' , params)},
+    findListFill(){ return fetch('/Fill/findListFill') },
     /**
      * 获取任务退回
      */

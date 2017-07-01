@@ -1,12 +1,12 @@
 <template>
 	<!-- App -->
-	<div id="app" >
+	<div id="app">
 		<!-- Statusbar -->
 		<f7-statusbar></f7-statusbar>
 
 		<!-- Main Views -->
 		<f7-views tabs>
-			<f7-view id="index" tab active main >
+			<f7-view id="index" tab active main>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -29,12 +29,14 @@
 								<div class="c_region">
 									<span class="btnArea" @click="BtnChange">
 										<span class="a-tackArea">{{ defaultArea }}</span>
-										<i class="iconfont icon-11"></i>
+									<i class="iconfont icon-11"></i>
 									</span>
 								</div>
 							</div>
 							<div class="col-80">
-								<f7-link href="/SearchIndex/"><div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div></f7-link>
+								<f7-link href="/SearchIndex/">
+									<div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div>
+								</f7-link>
 							</div>
 						</div>
 						<!--8个按钮-->
@@ -125,15 +127,15 @@
 						</div>
 
 						<!--区域选择-->
-						<SelectArea  :AreaDisplay= "AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
+						<SelectArea :AreaDisplay="AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
 						<!--结束-->
-						
+
 						<!-- page Content End-->
 
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Task" tab >
+			<f7-view id="index-Task" tab>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -151,11 +153,11 @@
 						<!-- tabs控制面板 -->
 						<!--加class：d-tab4 一行四个-->
 						<div class="taskTabs">
-							<a href="#tab1" class="tab-link active "><i class="iconfont color-dblue">&#xe6a0;</i>待审核</a>
-							<a href="#tab2" class="tab-link "><i class="iconfont color-dred">&#xe69e;</i>待填报</a>
-							<a href="#tab3" class="tab-link "><i class="iconfont color-dgreen">&#xe69a;</i>审核中</a>
-							<a href="#tab4" class="tab-link "><i class="iconfont color-dorange">&#xe69b;</i>已退回</a>
-							<a href="#tab5" class="tab-link "><i class="iconfont color-dgreen">&#xe69d;</i>已完成</a>
+							<a href="#tab1" class="tab-link active"><i class="iconfont color-dblue">&#xe6a0;</i>待审核</a>
+							<a href="#tab2" class="tab-link" @click="findListFill"><i class="iconfont color-dred">&#xe69e;</i>待填报</a>
+							<!--<a href="#tab3" class="tab-link "><i class="iconfont color-dgreen">&#xe69a;</i>审核中</a>-->
+							<a href="#tab3" class="tab-link "><i class="iconfont color-dorange">&#xe69b;</i>已退回</a>
+							<a href="#tab4" class="tab-link "><i class="iconfont color-dgreen">&#xe69d;</i>已完成</a>
 						</div>
 						<div class="content-block taskBox">
 							<div class="tabs">
@@ -164,7 +166,7 @@
 									<div class="taskList">
 										<ul>
 											<li>
-												<f7-link href="/TaskOverview/"  class="row no-gutter">
+												<f7-link href="/TaskOverview/" class="row no-gutter">
 													<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
 														<h3>广东国际大宗商品价格监测日报（审核者）</h3>
@@ -176,7 +178,7 @@
 												</f7-link>
 											</li>
 											<li>
-												<f7-link href="/TaskWrite/"  class="row no-gutter">
+												<f7-link href="/TaskWrite/" class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
 													<div class="row col-80">
 														<h3>广东国际大宗商品价格监测日报（填报者）</h3>
@@ -194,7 +196,17 @@
 								<div id="tab2" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
-											<li>
+											<li v-for="task in TaskList">
+												<f7-link href="/TaskWrite/" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>{{ task.taskName }}</h3>
+														<p>状态：<span>未完成</span></p>
+														<p>报告期：<span>{{ issueTimeSub(task.issueTime) }}</span>（第<span>{{task.taskTimes}}</span>期）</p>
+													</div>
+												</f7-link>
+											</li>
+											<!--<li>
 												<a href="#" class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
@@ -203,52 +215,12 @@
 														<p>报告期：<span>2016-12-12（第139期）</span></p>
 													</div>
 												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
+											</li>-->
 										</ul>
 									</div>
 								</div>
 								<!--审核中-->
-								<div id="tab3" class="tab">
+								<!--<div id="tab3" class="tab">
 									<div class="taskList taskLine-2">
 										<ul>
 											<li>
@@ -271,9 +243,9 @@
 											</li>
 										</ul>
 									</div>
-								</div>
+								</div>-->
 								<!--已退回-->
-								<div id="tab4" class="tab">
+								<div id="tab3" class="tab">
 									<div class="taskList">
 										<ul>
 											<li>
@@ -292,7 +264,7 @@
 									</div>
 								</div>
 								<!--已完成-->
-								<div id="tab5" class="tab">
+								<div id="tab4" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
 											<li>
@@ -325,7 +297,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Search" tab >
+			<f7-view id="index-Search" tab>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed no-page-content>
@@ -354,7 +326,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Wo" tab >
+			<f7-view id="index-Wo" tab>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -407,7 +379,7 @@
 													<div class="user-box-btn">点击登录</div>
 												</div>
 											</a>
-											
+
 										</li>
 									</ul>
 								</div>
@@ -482,49 +454,52 @@
 				<f7-link :icon="classObject3" text="我的" tab-link="#index-Wo" @click='changeIcon(3)'></f7-link>
 			</f7-toolbar>
 			<f7-login-screen>
-			  <!-- Login Screen content goes here -->
-			   <f7-view>
-			    <f7-pages>
-			      <f7-page login-screen no-page-content >
-				       <div class="page-content login-screen-content d-login">
-				<div class="login-logo">
-					<img src="../static/images.png" alt="logo"/>
-					<p>广东价格</p>
-				</div>
-				<form>
-					<div class="list-block">
-						<ul>
-							<li class="item-content">
-								<div class="item-media"><i class="iconfont">&#xe606;</i></div>
-								<div class="item-inner">
-									<div class="item-input">
-										<input type="text" v-model="User.loginName" name="username" placeholder="请输入用户名">
-									</div>
+				<!-- Login Screen content goes here -->
+				<f7-view>
+					<f7-pages>
+						<f7-page login-screen no-page-content>
+							<div class="page-content login-screen-content d-login">
+								<div class="login-logo">
+									<img src="../static/images.png" alt="logo" />
+									<p>广东价格</p>
 								</div>
-							</li>
-							<li class="item-content">
-								<div class="item-media"><i class="iconfont">&#xe629;</i></div>
-								<div class="item-inner">
-									<div class="item-input">
-										<input type="password" v-model="User.loginPwd"  name="password" placeholder="请输入登录密码">
+								<form>
+									<div class="list-block">
+										<ul>
+											<li class="item-content">
+												<div class="item-media"><i class="iconfont">&#xe606;</i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="text" v-model="User.loginName" name="username" placeholder="请输入用户名">
+													</div>
+												</div>
+											</li>
+											<li class="item-content">
+												<div class="item-media"><i class="iconfont">&#xe629;</i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="password" v-model="User.loginPwd" name="password" placeholder="请输入登录密码">
+													</div>
+												</div>
+											</li>
+										</ul>
+										<input class="button" @click.prevent="login" type="submit" name="submit" value="登录">
 									</div>
-								</div>
-							</li>
-						</ul>
-						<input class="button" @click.prevent="login" type="submit" name="submit" value="登录">
-					</div>
-					<div class="list-block">
-						<div class="list-block-label">
-							<p><a href="#" class="close-login-screen">Close Login Screen</a></p>
-						</div>
-					</div>
-				</form>
-				<div class="copyright">广东省价格监测中心</div>
-			</div></f7-page>
-			    </f7-pages>
-			  </f7-view>
+									<div class="list-block">
+										<div class="list-block-label">
+											<p>
+												<a href="#" class="close-login-screen">Close Login Screen</a>
+											</p>
+										</div>
+									</div>
+								</form>
+								<div class="copyright">广东省价格监测中心</div>
+							</div>
+						</f7-page>
+					</f7-pages>
+				</f7-view>
 			</f7-login-screen>
-	
+
 		</f7-views>
 
 	</div>
@@ -532,9 +507,16 @@
 
 <script>
 	import SelectArea from "./components/selectArea"
+	import Vue from 'vue'
 	export default {
 		data() {
 			return {
+				//登陆变量
+				User: {
+					loginName: '',
+					loginPwd: ''
+				},
+				//index变量
 				bgStyle: {
 					background: "url(" + require("./assets/bg.png") + ") no-repeat",
 					backgroundSize: '100% 100%'
@@ -545,18 +527,18 @@
 				classObject3: 'iconfont icon-wo1',
 				defaultArea: "广州",
 				AreaDisplay: "none",
-				User: {
-					loginName: '',
-					loginPwd: ''
-				}
+				//任务变量
+				TaskList: ''
 			}
 		},
-		mounted: function () {
-		    if(!localStorage.getItem('token')){
-		    	var myapp = new Framework7();
-		    	myapp.loginScreen();
-		    }
-	  	},
+		mounted: function() {
+			if(!localStorage.getItem('token')) {
+				var myapp = new Framework7();
+				myapp.loginScreen();
+			}
+
+		},
+		computed: {},
 		methods: {
 			changeIcon: function(index) {
 				switch(index) {
@@ -586,34 +568,44 @@
 						break;
 				}
 			},
-			BtnChange: function(){
-				if(this.AreaDisplay == 'none'){
+			BtnChange: function() {
+				if(this.AreaDisplay == 'none') {
 					this.AreaDisplay = 'flex'
-				} else{
+				} else {
 					this.AreaDisplay = 'none'
 				}
 			},
-			BtnValue: function(value){
+			BtnValue: function(value) {
 				this.defaultArea = value;
 				this.BtnChange();
 			},
-			login: function(){
-				if(this.User.loginName.trim() == '' || this.User.loginName == 'undefined'){
-					 f7.alert("用户名为空");
-				}else if(this.User.loginPwd.trim() == ''){
-					 f7.alert("密码为空");
-				} else{
+			issueTimeSub: function(time) {
+				return time.substring(0, 10);
+			},
+			//登陆事件
+			login: function() {
+				if(this.User.loginName.trim() == '' || this.User.loginName == 'undefined') {
+					f7.alert("用户名为空");
+				} else if(this.User.loginPwd.trim() == '') {
+					f7.alert("密码为空");
+				} else {
 					this.$ajax.Login(this.User)
-	                .then(response => {
-	                	if('token' in response){
-	                		localStorage.setItem('token',response.token);
-	                		f7.closeModal();
-	                	} else if('msg' in response){
-	                		f7.alert(response.msg);
-	                	}
-	                })
+						.then(response => {
+							if('token' in response) {
+								localStorage.setItem('token', response.token);
+								f7.closeModal();
+							} else if('msg' in response) {
+								f7.alert(response.msg);
+							}
+						})
 				}
+			},
+			findListFill: function() {
+				this.$ajax.findListFill().then(res => {
+					this.TaskList = res.dataList;
+				})
 			}
+
 		},
 		components: { SelectArea }
 	}

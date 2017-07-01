@@ -9,7 +9,7 @@
 			</f7-nav-left>
 			<f7-nav-center sliding>广东省国际大宗商品价格监测日报</f7-nav-center>
 			<f7-nav-right>
-				<i class="iconfont d-copy">&#xe608;</i>
+				<i class="iconfont d-copy" @click="autoFill">&#xe608;</i>
 			</f7-nav-right>
 		</f7-navbar>
 		<!--内容-->
@@ -30,8 +30,8 @@
 						<div class="content-block taskBox">
 							<div class="taskList taskLine-3">
 								<ul>
-									<li>
-										<a href="javascript:;" class="row">
+									<li v-for="(ProductItem,index) in DataList">
+										<!--<a href="javascript:;" class="row">
 											<div class="col-20"><img src="../../static/food.png" /></div>
 											<div class="row col-80">
 												<h3>天然气（纽约）<label class="right d-remark"><i class="iconfont">&#xe608;</i>备注</label></h3>
@@ -46,25 +46,8 @@
 											<p class="col-50">计价单位：美元/吨</p>
 											<p class="col-50">全省均价：3.45元</p>
 											<p class="col-50">产地品牌：广州</p>
-										</div>
-									</li>
-									<li>
-										<a href="javascript:;" class="row">
-											<div class="col-20"><img src="../../static/food.png" /></div>
-											<div class="row col-80">
-												<h3>天然气（纽约）<label class="right d-remark"><i class="iconfont">&#xe608;</i>备注</label></h3>
-												<p class="col-50 a-pre">上期：<span>3.55</span></p>
-												<p class="col-50">涨跌幅：<span class="color-dgreen">-23%</span></p>
-												<p class="col-50 a-current">本期：<input type="text" /></p>
-												<p class="col-50 d-details">详情<i class="iconfont">&#xe64a;</i></p>
-											</div>
-										</a>
-										<div class="row taskDetails">
-											<p class="col-50">规格等级：新鲜一级</p>
-											<p class="col-50">计价单位：美元/吨</p>
-											<p class="col-50">全省均价：3.55元</p>
-											<p class="col-50">产地品牌：广州</p>
-										</div>
+										</div>-->
+										<TaskWriteLi  :ProductItem="ProductItem" :index="index" @hasFilled="hasFilled"></TaskWriteLi>
 									</li>
 								</ul>
 							</div>
@@ -135,7 +118,7 @@
 			<!--填写暂存-->
 			<div class="taskToolbarBox">
 				<div class="row no-gutter taskToolbar">
-					<div class="col-40 btn d-TaskList">
+					<div class="col-40 btn d-TaskList" @click="filledTask">
 						<label>16</label>
 						<p class="title">已填写</p>
 						<p class="text">可进行修改</p>
@@ -143,97 +126,20 @@
 					<div class="col-30 btn" @click = "SaveData">暂存</div>
 					<div class="col-30 btn">提交</div>
 				</div>
-				<div class="taskList" style="display: none">
+				<div class="taskList" v-show="filled">
 					<ul>
-						<li>
+						<li v-for="(item,index) in filledDataList" @click="changeFilled(index)">
 							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="row no-gutter">
-								<p class="col-40 title">天然气（纽约）</p>
-								<p class="col-30">上期：3.45</p>
-								<p class="col-30">本期：3.45</p>
+								<p class="col-40 title">{{item.mercName}}</p>
+								<p class="col-30">上期：{{item.priorPrice}}</p>
+								<p class="col-30">本期：{{item.price}}</p>
 							</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<!--遮罩  默认2，可加class：z-index10 -->
-			<div class="d-fullscreen" style="display: none"></div>
+			<div class="d-fullscreen" v-show="filled" @click="filledTask"></div>
 			<!--上传图片-->
 			<div class="uploadBox" style="display: none">
 				<form>
@@ -275,11 +181,12 @@
 
 <script>
 	import InitPage from '../components/PageInit.vue';
+	import TaskWriteLi from "../components/TaskWriteLi.vue"
 	export default {
 		data(){
 			return {
-				detailShow: 'none',
-				Pjson:{ 
+				filled: false,
+				Pjson: { 
 					"token":"",
 					"objectId":"2028",
 				    "taskDireId":"195",
@@ -304,29 +211,57 @@
 					            "isError":""
 					        }
 				    ],
-				}
-
+				},
+				DataList :[],
+				filledDataList: [],
 			}
 		},
 		methods: {
+			//初始化swiper 获取并处理第一页数据
 			pageInit: function() {
 				InitPage.SwiperInit();
+				this.getInitForm();
 			},
-			showDetail: function(){
-				if(this.detailShow == 'none'){
-					this.detailShow = 'flex'
-				} else{
-					this.detailShow = 'none'
-				}
+			//获取并处理第一页数据
+			getInitForm: function(){
+				this.$ajax.getInitForm().then(res =>{
+					for(var key in res.DataList){
+						if(res.DataList[key].price == 'null'){
+							res.DataList[key].price = '';
+						}
+					}
+					this.DataList = res.DataList;
+				})
 			},
+			//暂存时间
 			SaveData: function(){
 				var token = localStorage.getItem('token');
 				this.Pjson.token = token ;
 				console.log(this.Pjson);
 				this.$ajax.Savedata(this.Pjson).then(res =>{
 					console.log(res);
-				})
+				});
+			},
+			//打开已填写列表
+			filledTask: function(){
+				this.filled = !this.filled;
+			},
+			//填写正确后移到已填报列表
+			hasFilled: function(index){
+				this.filledDataList.push(this.DataList[index]);
+				this.DataList.splice(index,1);
+			},
+			//修改已填报数据
+			changeFilled: function(index){
+				this.DataList.unshift(this.filledDataList[index]);
+				this.filledDataList.splice(index,1);
+			},
+			autoFill: function(){
+				for(var key in this.DataList){
+					this.DataList[key].price = this.DataList[key].priorPrice;
+				}
 			}
-		}
+		},
+		components: { TaskWriteLi }
 	}
 </script>
