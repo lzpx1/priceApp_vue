@@ -30,7 +30,7 @@
 						<div class="content-block taskBox">
 							<div class="taskList taskLine-3">
 								<ul>
-									<li v-for="(ProductItem,index) in DataList">
+									<li v-for="(ProductItem,index) in DataList" >
 										<!--<a href="javascript:;" class="row">
 											<div class="col-20"><img src="../../static/food.png" /></div>
 											<div class="row col-80">
@@ -47,7 +47,7 @@
 											<p class="col-50">全省均价：3.45元</p>
 											<p class="col-50">产地品牌：广州</p>
 										</div>-->
-										<TaskWriteLi  :ProductItem="ProductItem" :index="index" @hasFilled="hasFilled"></TaskWriteLi>
+										<TaskWriteLi  :ProductItem="ProductItem" :index="index" @hasFilled="hasFilled" @ShowRemarksBox="ShowRemarksBox"></TaskWriteLi>
 									</li>
 								</ul>
 							</div>
@@ -140,6 +140,9 @@
 			</div>
 			<!--遮罩  默认2，可加class：z-index10 -->
 			<div class="d-fullscreen" v-show="filled" @click="filledTask"></div>
+			
+			<div class="d-fullscreen" v-show="remarksBox" @click="CloseRemarksBox"></div>
+			
 			<!--上传图片-->
 			<div class="uploadBox" style="display: none">
 				<form>
@@ -151,25 +154,30 @@
 				</form>
 			</div>
 			<!--备注-->
-			<div class="remarksBox" style="display: none">
+			<div class="remarksBox" v-show="remarksBox">
 				<form>
-					<h3>天然气（纽约）</h3>
+					<h3>{{ mercName }}</h3>
 					<div class="line">
 						波动类型
-						<select name="" id="">
+						<!--<select name="" id="">
 							<option value="成本">成本</option>
 							<option value="供给">供给</option>
 							<option value="需求">需求</option>
 							<option value="综合">综合</option>
 							<option value="其他">其他</option>
+						</select>-->
+						<select v-model="selected">
+							<option v-for="option in options" v-bind:value="option.value">
+								{{ option.text }}
+							</option>
 						</select>
 					</div>
 					<div class="line">
 						波动原因
-						<textarea rows="5" placeholder="原因"></textarea>
+						<textarea rows="5" placeholder="原因" v-model="merctext"></textarea>
 					</div>
 					<div class="line">
-						<input type="submit" value="确定" />
+						<input type="submit" value="确定" @click.prevent = "mercReason"/>
 					</div>
 				</form>
 			</div>
@@ -180,40 +188,50 @@
 </template>
 
 <script>
-	import InitPage from '../components/PageInit.vue';
-	import TaskWriteLi from "../components/TaskWriteLi.vue"
+	import InitPage from '../components/PageInit';
+	import TaskWriteLi from "../components/TaskWriteLi"
 	export default {
 		data(){
 			return {
 				filled: false,
-				Pjson: { 
-					"token":"",
+				Pjson: {
 					"objectId":"2028",
 				    "taskDireId":"195",
 				    "taskReportedId":"37393",
 				    "dataList":[
-					        {
-					            "dataValue":"13.57",
-					            "firstAckValue":"110",
-					            "secondAckValue":"110",
-					            "lastAckValue":"",
-					            "indicatorId":"",
-					            "mercId":"8",
-					            "mercName":"晚籼米",
-					            "mercSpec":"优质",
-					            "unitGrade":"一等品",
-					            "unitName":"500克/元",
-					            "unitId":"38",
-					            "waveReason":"1",
-					            "waveReasonRemark":"超市促销",
-					            "dataValueLast":"118",
-					            "isProblem":"1",
-					            "isError":""
-					        }
-				    ],
+				        {
+				            "dataValue":"13.57",
+				            "firstAckValue":"110",
+				            "secondAckValue":"110",
+				            "lastAckValue":"",
+				            "indicatorId":"",
+				            "mercId":"8",
+				            "mercName":"晚籼米",
+				            "mercSpec":"优质",
+				            "mercGrade":"一等品",
+				            "unitName":"500克/元",
+				            "unitId":"38",
+				            "waveReason":"1",
+				            "waveReasonRemark":"超市促销",
+				            "dataValueLast":"118",
+				            "isProblem":"1",
+				            "isError":""
+				        }
+				    ]
 				},
+				selected: '0',
 				DataList :[],
 				filledDataList: [],
+				mercName: '',
+				mercIndex: '',
+				merctext: '',
+				remarksBox: false,
+				options: [
+				    { text: '成本', value: '0' },
+				    { text: '供给', value: '1' },
+				    { text: '需求', value: '2' },
+				    { text: '金融', value: '3' }
+			    ]
 			}
 		},
 		methods: {
@@ -225,15 +243,18 @@
 			//获取并处理第一页数据
 			getInitForm: function(){
 				this.$ajax.getInitForm().then(res =>{
+					//修改后端的测试数据   以后根据实际删除或修改
 					for(var key in res.DataList){
 						if(res.DataList[key].price == 'null'){
 							res.DataList[key].price = '';
+							res.DataList[key].waveReason = key;
+							res.DataList[key].waveReasonRemark = key;
 						}
 					}
 					this.DataList = res.DataList;
 				})
 			},
-			//暂存时间
+			//暂存事件
 			SaveData: function(){
 				var token = localStorage.getItem('token');
 				this.Pjson.token = token ;
@@ -256,10 +277,29 @@
 				this.DataList.unshift(this.filledDataList[index]);
 				this.filledDataList.splice(index,1);
 			},
+			//自动取上期数据
 			autoFill: function(){
 				for(var key in this.DataList){
 					this.DataList[key].price = this.DataList[key].priorPrice;
 				}
+			},
+			//打开备注
+			ShowRemarksBox: function(index){
+				this.mercIndex = index;
+				this.merctext = this.DataList[index].waveReasonRemark;
+				this.mercName = this.DataList[index].mercName;
+				this.selected = this.DataList[index].waveReason == '' ? this.selected : this.DataList[index].waveReason;
+				this.remarksBox = true;
+			},
+			//关闭备注
+			CloseRemarksBox: function(){
+				this.remarksBox = false;
+			},
+			//波动原因填写完毕
+			mercReason: function(){
+				this.DataList[this.mercIndex].waveReasonRemark = this.merctext;
+				this.DataList[this.mercIndex].waveReason = this.selected;
+				this.CloseRemarksBox();
 			}
 		},
 		components: { TaskWriteLi }
