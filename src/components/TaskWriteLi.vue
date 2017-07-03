@@ -3,9 +3,9 @@
 		<a href="javascript:;" class="row">
 		<div class="col-20"><img src="../../static/food.png" /></div>
 		<div class="row col-80">
-			<h3>{{ ProductItem.mercName }}<label class="right d-remark"><i class="iconfont">&#xe608;</i>备注</label></h3>
+			<h3>{{ ProductItem.mercName }}<label class="right d-remark"  @click="ShowRemarksBox"><i class="iconfont">&#xe608;</i>备注</label></h3>
 			<p class="col-50 a-pre">上期：<span>{{ ProductItem.priorPrice }}</span></p>
-			<p class="col-50">涨跌幅：<span class="color-dgreen">{{ wave }}</span></p>
+			<p class="col-50">涨跌幅：<span class="color-dgreen">{{ wave }}%</span></p>
 			<p class="col-50 a-current">本期：<input type="text"  v-model="ProductItem.price" @blur="blur"/></p>
 			<p class="col-50 d-details" @click="showDetail">详情<i class="iconfont">&#xe64a;</i></p>
 		</div>
@@ -50,7 +50,9 @@
 					console.log("suc");
 					this.$emit("hasFilled",this.index);
 				}
-				
+			},
+			ShowRemarksBox: function(){
+				this.$emit("ShowRemarksBox",this.index);
 			}
 		}
 	}
