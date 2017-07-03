@@ -83,7 +83,7 @@ export default {
      * 暂存数据
      */
     Savedata(params){
-    	return fetch('/support/temporarySave.do',params);
+    	return fetch('/support/temporarySave.do',{ json : JSON.stringify(params) });
     },
     getInitForm(){
     	return fetchGet('/getInitFormDataForObj.do');
