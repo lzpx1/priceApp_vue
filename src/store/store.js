@@ -12,7 +12,7 @@ const store = new Vuex.Store({
 			DefaultArea: '广州',
 			AreaDisplay :'none',
 		},
-		headNav: 'head-nav1',
+		headNav: 'head-nav1'
 	},
 	getters: {	
 		head: state => state.head,
