@@ -44,9 +44,14 @@
 				}
 			},
 			blur: function(){
-				if(this.ProductItem.price.trim() == '' || (this.wava > 3 || this.wava < -3)){
-					console.log("error");
-				}else{
+				//还要做条件判断
+				if(this.ProductItem.price.trim() != '' && (this.wave > 3 || this.wave < -3)){
+					if(this.ProductItem.waveReasonRemark.trim() == ''){
+						this.$emit("ShowRemarksBox",this.index,true);
+					}else{
+						this.$emit("hasFilled",this.index);
+					}
+				} else if(this.ProductItem.price.trim() != ''){
 					console.log("suc");
 					this.$emit("hasFilled",this.index);
 				}

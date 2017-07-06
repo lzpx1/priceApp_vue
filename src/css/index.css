@@ -407,7 +407,8 @@ p{margin: 0;padding: 0;}
 
 
 /*小于375宽度的设备*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 350px) {
+	html{font-size: 14px !important;}
 	body{font-size: 12px !important;}
 	.list-block{font-size:14px;}
 	#PriceWarning .Warning_list .item_content>span{top:50%;transform: translateY(-45%);}

@@ -19,7 +19,6 @@ import Framework7ThemeColors from 'framework7/dist/css/framework7.material.color
 
 
 // Import App Custom Styles
-import AppStyles from './css/app.css'
 import c_style from './css/c_style.css'
 import indexStyle from './css/index.css'
 import taskStyle from './css/task.css'
