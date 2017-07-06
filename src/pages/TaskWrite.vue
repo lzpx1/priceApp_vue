@@ -231,8 +231,17 @@
 				    { text: '供给', value: '1' },
 				    { text: '需求', value: '2' },
 				    { text: '金融', value: '3' }
-			    ]
+			    ],
+				taskReportedId: '',
+				taskCataId: ''
 			}
+		},
+		created(){
+			this.taskReportedId = this.$route.params.taskReportedId;
+			this.taskCataId = this.$route.params.taskCataId;
+		},
+		mounted: function(){
+			console.log(this.$route.url);
 		},
 		methods: {
 			//初始化swiper 获取并处理第一页数据
