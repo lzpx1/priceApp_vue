@@ -487,105 +487,9 @@
 				classObject3: 'iconfont icon-wo1',
 				defaultArea: "广州",
 				AreaDisplay: "none",
-				ListWriteArr:[{
-					"taskStartTime": "2017-03-30 06:00:00.0",
-					"taskCataId": 1,
-					"reportedStatus": "0",
-					"taskTimes": "2017/8",
-					"issueTime": "2017-03-30 11:52:29.0",
-					"taskReportedId": 1711818,
-					"ishasten": null,
-					"taskEndTime": "2017-03-30 12:00:00.0",
-					"taskName": "广东省菜篮子价格监测日报表"
-				},
-					{
-						"taskStartTime": "2017-03-29 06:00:00.0",
-						"taskCataId": 1,
-						"reportedStatus": "0",
-						"taskTimes": "2017/7",
-						"issueTime": "2017-03-29 08:47:58.0",
-						"taskReportedId": 1711573,
-						"ishasten": 1,
-						"taskEndTime": "2017-03-29 12:00:00.0",
-						"taskName": "广东省菜篮子价格监测日报表"
-					},
-					{
-						"taskStartTime": "2017-03-22 06:00:00.0",
-						"taskCataId": 1,
-						"reportedStatus": "0",
-						"taskTimes": "2017/6",
-						"issueTime": "2017-03-22 09:22:38.0",
-						"taskReportedId": 1711321,
-						"ishasten": 1,
-						"taskEndTime": "2017-03-22 12:00:00.0",
-						"taskName": "广东省菜篮子价格监测日报表"
-					}],//任务填报
-				ListReturnArr:[{
-					"taskStartTime": "2017-03-30 06:00:00.0",
-					"taskCataId": 1,
-					"reportedStatus": "0",
-					"taskTimes": "2017/8",
-					"issueTime": "2017-03-30 11:52:29.0",
-					"taskReportedId": 1711818,
-					"ishasten": null,
-					"taskEndTime": "2017-03-30 12:00:00.0",
-					"taskName": "广东省菜篮子价格监测日报表"
-				},
-					{
-						"taskStartTime": "2017-03-29 06:00:00.0",
-						"taskCataId": 1,
-						"reportedStatus": "0",
-						"taskTimes": "2017/7",
-						"issueTime": "2017-03-29 08:47:58.0",
-						"taskReportedId": 1711573,
-						"ishasten": 1,
-						"taskEndTime": "2017-03-29 12:00:00.0",
-						"taskName": "广东省菜篮子价格监测日报表"
-					},
-					{
-						"taskStartTime": "2017-03-22 06:00:00.0",
-						"taskCataId": 1,
-						"reportedStatus": "0",
-						"taskTimes": "2017/6",
-						"issueTime": "2017-03-22 09:22:38.0",
-						"taskReportedId": 1711321,
-						"ishasten": 1,
-						"taskEndTime": "2017-03-22 12:00:00.0",
-						"taskName": "广东省菜篮子价格监测日报表"
-					}],//任务退回
-				ListCompletedArr:[{
-					"taskStartTime": "2017-03-30 06:00:00.0",
-					"taskCataId": 1,
-					"reportedStatus": "0",
-					"taskTimes": "2017/8",
-					"issueTime": "2017-03-30 11:52:29.0",
-					"taskReportedId": 1711818,
-					"ishasten": null,
-					"taskEndTime": "2017-03-30 12:00:00.0",
-					"taskName": "广东省菜篮子价格监测日报表"
-				},
-					{
-						"taskStartTime": "2017-03-29 06:00:00.0",
-						"taskCataId": 1,
-						"reportedStatus": "0",
-						"taskTimes": "2017/7",
-						"issueTime": "2017-03-29 08:47:58.0",
-						"taskReportedId": 1711573,
-						"ishasten": 1,
-						"taskEndTime": "2017-03-29 12:00:00.0",
-						"taskName": "广东省菜篮子价格监测日报表"
-					},
-					{
-						"taskStartTime": "2017-03-22 06:00:00.0",
-						"taskCataId": 1,
-						"reportedStatus": "0",
-						"taskTimes": "2017/6",
-						"issueTime": "2017-03-22 09:22:38.0",
-						"taskReportedId": 1711321,
-						"ishasten": 1,
-						"taskEndTime": "2017-03-22 12:00:00.0",
-						"taskName": "广东省菜篮子价格监测日报表"
-					}],//任务完成
+				ListWriteArr:[],//任务填报
+				ListReturnArr:[],//任务退回
+				ListCompletedArr:[],//任务完成
 			}
 		},
 		mounted: function() {
@@ -593,9 +497,9 @@
 				var myapp = new Framework7();
 				myapp.loginScreen();
 			}
-			/*this.taskListWriteData();
+			this.taskListWriteData();
 			this.taskListReturnData();
-			this.taskListCompletedData();*/
+			this.taskListCompletedData();
 		},
 		computed: {},
 		methods: {
