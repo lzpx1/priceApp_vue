@@ -91,7 +91,7 @@ export default {
     /**
      * 获取任务填报列表
      */
-    findListFill(){ return fetch('/Fill/findListFill') },
+	taskListWrite(){ return fetch('/Fill/findListFill') },
     /**
      * 获取任务退回
      */

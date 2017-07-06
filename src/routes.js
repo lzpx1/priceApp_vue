@@ -56,7 +56,7 @@ export default [
       component: require('./pages/TaskFile.vue')
   },
   {
-      path: '/TaskWrite/',
+      path: '/TaskWrite/:taskReportedId/:taskCataId',
       component: require('./pages/TaskWrite.vue')
   },
   {

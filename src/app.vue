@@ -152,12 +152,12 @@
 						<!-- Page Content -->
 						<!-- tabs控制面板 -->
 						<!--加class：d-tab4 一行四个-->
-						<div class="taskTabs">
+						<div class="taskTabs d-tab4">
 							<a href="#tab1" class="tab-link active"><i class="iconfont color-dblue">&#xe6a0;</i>待审核</a>
-							<a href="#tab2" class="tab-link" @click="findListFill"><i class="iconfont color-dred">&#xe69e;</i>待填报</a>
+							<a href="#tab2" class="tab-link"><i class="iconfont color-dred">&#xe69e;</i>待填报</a>
 							<!--<a href="#tab3" class="tab-link "><i class="iconfont color-dgreen">&#xe69a;</i>审核中</a>-->
-							<a href="#tab3" class="tab-link "><i class="iconfont color-dorange">&#xe69b;</i>已退回</a>
-							<a href="#tab4" class="tab-link "><i class="iconfont color-dgreen">&#xe69d;</i>已完成</a>
+							<a href="#tab4" class="tab-link "><i class="iconfont color-dorange">&#xe69b;</i>已退回</a>
+							<a href="#tab5" class="tab-link "><i class="iconfont color-dgreen">&#xe69d;</i>已完成</a>
 						</div>
 						<div class="content-block taskBox">
 							<div class="tabs">
@@ -165,27 +165,15 @@
 								<div id="tab1" class="tab active">
 									<div class="taskList">
 										<ul>
-											<li>
-												<f7-link href="/TaskOverview/" class="row no-gutter">
+											<li v-for = 'item in ListWriteArr' >
+												<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])" class="row no-gutter">
 													<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报（审核者）</h3>
+														<h3>{{item.taskName}}</h3>
 														<p class="col-50">实审/应审：<span>0/1</span></p>
 														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>剩余时间：<span>3小时39分</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</f7-link>
-											</li>
-											<li>
-												<f7-link href="/TaskWrite/" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报（填报者）</h3>
-														<p class="col-50">实审/应审：<span>0/1</span></p>
-														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>剩余时间：<span>3小时39分</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
 													</div>
 												</f7-link>
 											</li>
@@ -196,75 +184,21 @@
 								<div id="tab2" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
-											<li v-for="task in TaskList">
-												<f7-link href="/TaskWrite/" class="row no-gutter">
+											<li v-for = 'item in ListWriteArr'>
+												<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])"  class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>{{ task.taskName }}</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>{{ issueTimeSub(task.issueTime) }}</span>（第<span>{{task.taskTimes}}</span>期）</p>
+														<h3>{{item.taskName}}</h3>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
 													</div>
 												</f7-link>
 											</li>
-											<!--<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>-->
 										</ul>
 									</div>
 								</div>
 								<!--审核中-->
 								<!--<div id="tab3" class="tab">
-									<div class="taskList taskLine-2">
-										<ul>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报222</h3>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>-->
-								<!--已退回-->
-								<div id="tab3" class="tab">
-									<div class="taskList">
-										<ul>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p class="col-50">实审/应审：<span>0/1</span></p>
-														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>剩余时间：<span>3小时39分</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<!--已完成-->
-								<div id="tab4" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
 											<li>
@@ -272,20 +206,46 @@
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
 														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>报告期：<span>2016-12-12</span></p>
-														<p>完成时间：<span>2016-12-12 11:21</span></p>
+														<p>报告期：<span>2016-12-12（第139期）</span></p>
+														<p>剩余时间：<span>已过期</span></p>
 													</div>
 												</a>
 											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
+										</ul>
+									</div>
+								</div>-->
+								<!--已退回-->
+								<div id="tab4" class="tab">
+									<div class="taskList">
+										<ul>
+											<li v-for = 'item in ListReturnArr'>
+												<f7-link href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报222</h3>
-														<p>报告期：<span>2016-12-12</span></p>
-														<p>完成时间：<span>2016-12-12 11:21</span></p>
+														<h3>{{item.taskName}}</h3>
+														<p class="col-50">实审/应审：<span>0/1</span></p>
+														<p class="col-50">实审/应审：<span>1/1</span></p>
+														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
 													</div>
-												</a>
+												</f7-link>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!--已完成-->
+								<div id="tab5" class="tab">
+									<div class="taskList taskLine-3">
+										<ul>
+											<li v-for = 'item in ListCompletedArr'>
+												<f7-link href="#" class="row no-gutter">
+													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
+													<div class="row col-80">
+														<h3>{{item.taskName}}</h3>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>完成时间：<span>item.reportedTime.substring(0,10)</span></p>
+													</div>
+												</f7-link>
 											</li>
 										</ul>
 									</div>
@@ -527,8 +487,9 @@
 				classObject3: 'iconfont icon-wo1',
 				defaultArea: "广州",
 				AreaDisplay: "none",
-				//任务变量
-				TaskList: ''
+				ListWriteArr:[],//任务填报
+				ListReturnArr:[],//任务退回
+				ListCompletedArr:[],//任务完成
 			}
 		},
 		mounted: function() {
@@ -536,10 +497,30 @@
 				var myapp = new Framework7();
 				myapp.loginScreen();
 			}
-
+			this.taskListWriteData();
+			this.taskListReturnData();
+			this.taskListCompletedData();
 		},
 		computed: {},
 		methods: {
+			taskListWriteData: function(){
+				//获取任务填报数据
+				this.$ajax.taskListWrite().then(res => {
+					this.ListWriteArr = [...res.dataList];
+				})
+			},
+			taskListReturnData: function(){
+				//获取任务退回数据
+				this.$ajax.taskListReturn().then(res => {
+					this.ListReturnArr = [...res.dataList];
+				})
+			},
+			taskListCompletedData: function(){
+				//获取任务完成数据
+				this.$ajax.taskListCompleted().then(res => {
+					this.ListCompletedArr = [...res.dataList];
+				})
+			},
 			changeIcon: function(index) {
 				switch(index) {
 					case 0:
@@ -600,12 +581,55 @@
 						})
 				}
 			},
-			findListFill: function() {
-				this.$ajax.findListFill().then(res => {
-					this.TaskList = res.dataList;
-				})
-			}
+			//计算剩余时间
+			timeRemaining: function(end) {
+				//计算时间
+				let currTime = new Date().getTime(),//当前时间
+						endTime = new Date(end).getTime();//结束时间
+				if(end != null && endTime >= currTime){
+					let remaining = endTime - currTime,
+							h = Math.floor(remaining/(3600*1000)),//时
+							min = Math.floor((remaining%(3600*1000))/(60*1000));//分
+					return h + '时' + min + '分'
+				}else{
+					return "已过期"
+				}
 
+			},
+			/*
+			 * 链接--例子
+			 *	:href="bindLink('TaskWrite', [item.taskReportedId, item.taskCataId],[{index: item.taskReportedId,id: item.taskCataId}])"
+			 *	返回：href = '/TaskWrite/1711818/1/?index=1711818&id:1'
+			 */
+			bindLink: function(path,params,query){
+				let pathHead = '/'+ path + '/';
+
+				//判断params参数是否为空
+				if(params != undefined && params.length != 0){
+					for(let i=0;i<params.length;i++){
+						if(params[i] == null && params[i] == undefined ){
+							if(i < params.length){
+								continue;
+							}else{
+								return pathHead;
+							}
+						}
+						else{
+							pathHead = pathHead + params[i] + '/';
+
+							if(i+1 == params.length && query == undefined){
+								return pathHead;
+							} else if(i+1 >= params.length && query.length != 0){
+								let queryStr = JSON.stringify(query[0]).replace(/{/, '?').replace(/,/, '&').replace(/:/g, '=').replace(/"/g, '').replace(/}/, '');
+								return pathHead + queryStr;
+							}
+						}
+					}
+				}else{
+					return pathHead;
+				}
+
+			}
 		},
 		components: { SelectArea }
 	}
