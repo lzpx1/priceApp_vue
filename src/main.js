@@ -16,8 +16,9 @@ import Framework7Theme from 'framework7/dist/css/framework7.material.min.css'
 import Framework7ThemeColors from 'framework7/dist/css/framework7.material.colors.min.css'
 */
 
+
+
 // Import App Custom Styles
-import AppStyles from './css/app.css'
 import c_style from './css/c_style.css'
 import indexStyle from './css/index.css'
 import taskStyle from './css/task.css'
@@ -27,11 +28,14 @@ import Routes from './routes.js'
 
 // Import App Component
 import App from './app'
-import store from './store'
+import store from './store/store'
 // Init F7 Vue Plugin
 
 Vue.use(Framework7Vue)
 
+import ajax from './ajax/ajax.js'
+
+Vue.prototype.$ajax = ajax;
 
 // Init App
 var app = new Vue({
@@ -43,6 +47,7 @@ var app = new Vue({
     /* Uncomment to enable Material theme: */
     // material: true,
     routes: Routes,
+    modalTitle:"提示",
   },
   store,
   // Register App Component
@@ -50,4 +55,5 @@ var app = new Vue({
     app: App
   }
 });
+
 
