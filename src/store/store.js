@@ -12,25 +12,9 @@ const store = new Vuex.Store({
 			DefaultArea: '广州',
 			AreaDisplay :'none',
 		},
-		audio: {},
-		head: {
-			toggle: false,
-			title: '',
-			style: { 'background': 'rgba(43,162,251,0)' }
-		},
-		headNav: 'head-nav1',
-		audioLoadding: false,
-		detailPlayerFlag: false,
-		showPlayer: false,
-		listenCount: 0,
-		isPlay: true,
-		listInfo: {
-			songList: [],
-			songIndex: 0
-		}
+		headNav: 'head-nav1'
 	},
-	getters: {
-		audio: state => state.audio,
+	getters: {	
 		head: state => state.head,
 		audioLoadding: state => state.audioLoadding,
 		detailPlayerFlag: state => state.detailPlayerFlag,
@@ -41,7 +25,7 @@ const store = new Vuex.Store({
 		areaToChange: (state) => {
 			if(state.Area.AreaDisplay == 'none'){
 				state.Area.AreaDisplay = 'flex'
-			} else{
+			} else {
 				state.Area.AreaDisplay = 'none'
 			}
 		},

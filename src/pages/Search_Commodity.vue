@@ -9,7 +9,10 @@
 			</f7-nav-left>
 			<f7-nav-center sliding>数据查询详情</f7-nav-center>
 			<f7-nav-right>
-				<span class="btnArea">广州<i class="iconfont icon-11"></i></span>
+				<span class="btnArea" @click="BtnChange">
+					<span class="a-tackArea">{{ defaultArea }}</span>
+					<i class="iconfont icon-11"></i>
+				</span>
 			</f7-nav-right>
 		</f7-navbar>
 		<!--内容-->
@@ -76,7 +79,8 @@
 
 			</ul>
 		</div>
-
+		<!--区域选择-->
+		<SelectArea  slot='fixed' :AreaDisplay= "AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
 		<!--结束-->
 		<!---->
 	</f7-page>
@@ -84,12 +88,30 @@
 
 <script>
 	import InitPage from '../components/PageInit.vue';
+	import SelectArea from "../components/selectArea";
 	export default {
-		methods: {
-			pageInit: function(){
-				InitPage.TimeInit('.calendar','#calendar');
+		data(){
+			return {
+				defaultArea: "广州",
+				AreaDisplay: "none",
 			}
 		},
-		components: {  }
+		methods:{
+			pageInit: function(){
+				InitPage.TimeInit('.calendar','#calendar');
+			},
+			BtnChange: function(){
+				if(this.AreaDisplay == 'none'){
+					this.AreaDisplay = 'flex'
+				} else{
+					this.AreaDisplay = 'none'
+				}
+			},
+			BtnValue:function(value){
+				this.defaultArea = value;
+				this.BtnChange();
+			}
+		},
+		components: { SelectArea }
 	}
 </script>

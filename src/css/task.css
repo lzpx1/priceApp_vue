@@ -1,3 +1,4 @@
+html{font-size: 17px;}
 .navbar .right{font-size: .8rem;}
 .navbar-fixed>.searchbar~.page-content{padding-top: 96px;}
 .row .col-30{    width: 30%;}
@@ -41,7 +42,7 @@
 .taskBox .taskList.taskLine-2 li .col-80 h3{margin:.2rem 0;}
 .taskBox .taskList.taskLine-2 li .col-80 p{margin:.5rem 0;}
 .taskBox .taskList li .col-80 p:last-child{margin-bottom: 0;}
-.taskBox .taskList li .taskDetails{display:none;padding: .5rem; background: #f6f6f6;overflow: hidden;-webkit-animation: Height100A .5s; animation: Height100A .5s;}
+.taskBox .taskList li .taskDetails{padding: .5rem; background: #f6f6f6;overflow: hidden;-webkit-animation: Height100A .5s; animation: Height100A .5s;}
 .taskBox .taskList li .taskDetails p{margin:.2rem 0;color: #333;}
 .taskBox .taskList li p.d-details{color: #1682dd;}
 .taskBox .taskList li p.d-details i{margin:0 .2rem;font-size: 1rem;vertical-align: middle;}

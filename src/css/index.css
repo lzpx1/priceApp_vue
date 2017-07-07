@@ -92,6 +92,8 @@ p{margin: 0;padding: 0;}
 #Wo_Detail ul li i{font-size: 1.5rem;}
 #Wo_Detail ul li:after{content: '';position: absolute;left: 0;bottom: 0;right: auto;top: auto;height: 1px;width: 100%;background-color: #EEEEEE;display: block;z-index: 15;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;}
 #Wo_Detail ul li:last-child::after{height: 0;}
+#Wo_Detail .exitLogin{width: 90%;text-align: center;margin: 2rem auto;background-color: #1682dd;padding: .6rem 0;border-radius: 10px;font-size: 1rem;color: #fff;}
+
 /*my_application 我的应用*/
 #my_application .navbar{background-color: #FFF;}
 #my_application .navbar form{background-color: #FFF;padding:0 1rem;}
@@ -405,7 +407,8 @@ p{margin: 0;padding: 0;}
 
 
 /*小于375宽度的设备*/
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 350px) {
+	html{font-size: 14px !important;}
 	body{font-size: 12px !important;}
 	.list-block{font-size:14px;}
 	#PriceWarning .Warning_list .item_content>span{top:50%;transform: translateY(-45%);}

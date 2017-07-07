@@ -6,7 +6,7 @@
 
 		<!-- Main Views -->
 		<f7-views tabs>
-			<f7-view id="index" tab active main >
+			<f7-view id="index" tab active main>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -29,12 +29,14 @@
 								<div class="c_region">
 									<span class="btnArea" @click="BtnChange">
 										<span class="a-tackArea">{{ defaultArea }}</span>
-										<i class="iconfont icon-11"></i>
+									<i class="iconfont icon-11"></i>
 									</span>
 								</div>
 							</div>
 							<div class="col-80">
-								<f7-link href="/SearchIndex/"><div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div></f7-link>
+								<f7-link href="/SearchIndex/">
+									<div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div>
+								</f7-link>
 							</div>
 						</div>
 						<!--8个按钮-->
@@ -125,15 +127,15 @@
 						</div>
 
 						<!--区域选择-->
-						<SelectArea  :AreaDisplay= "AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
+						<SelectArea :AreaDisplay="AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
 						<!--结束-->
-						
+
 						<!-- page Content End-->
 
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Task" tab >
+			<f7-view id="index-Task" tab>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -150,10 +152,10 @@
 						<!-- Page Content -->
 						<!-- tabs控制面板 -->
 						<!--加class：d-tab4 一行四个-->
-						<div class="taskTabs">
-							<a href="#tab1" class="tab-link active "><i class="iconfont color-dblue">&#xe6a0;</i>待审核</a>
-							<a href="#tab2" class="tab-link "><i class="iconfont color-dred">&#xe69e;</i>待填报</a>
-							<a href="#tab3" class="tab-link "><i class="iconfont color-dgreen">&#xe69a;</i>审核中</a>
+						<div class="taskTabs d-tab4">
+							<a href="#tab1" class="tab-link active"><i class="iconfont color-dblue">&#xe6a0;</i>待审核</a>
+							<a href="#tab2" class="tab-link"><i class="iconfont color-dred">&#xe69e;</i>待填报</a>
+							<!--<a href="#tab3" class="tab-link "><i class="iconfont color-dgreen">&#xe69a;</i>审核中</a>-->
 							<a href="#tab4" class="tab-link "><i class="iconfont color-dorange">&#xe69b;</i>已退回</a>
 							<a href="#tab5" class="tab-link "><i class="iconfont color-dgreen">&#xe69d;</i>已完成</a>
 						</div>
@@ -163,27 +165,15 @@
 								<div id="tab1" class="tab active">
 									<div class="taskList">
 										<ul>
-											<li>
-												<f7-link href="/TaskOverview/"  class="row no-gutter">
+											<li v-for = 'item in ListWriteArr' >
+												<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])" class="row no-gutter">
 													<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报（审核者）</h3>
+														<h3>{{item.taskName}}</h3>
 														<p class="col-50">实审/应审：<span>0/1</span></p>
 														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>剩余时间：<span>3小时39分</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</f7-link>
-											</li>
-											<li>
-												<f7-link href="/TaskWrite/"  class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报（填报者）</h3>
-														<p class="col-50">实审/应审：<span>0/1</span></p>
-														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>剩余时间：<span>3小时39分</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
 													</div>
 												</f7-link>
 											</li>
@@ -194,62 +184,22 @@
 								<div id="tab2" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
-											<li>
-												<a href="#" class="row no-gutter">
+											<li v-for = 'item in ListWriteArr'>
+												<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])"  class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
+														<h3>{{item.taskName}}</h3>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
 													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>状态：<span>未完成</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
+												</f7-link>
 											</li>
 										</ul>
 									</div>
 								</div>
 								<!--审核中-->
-								<div id="tab3" class="tab">
-									<div class="taskList taskLine-2">
+								<!--<div id="tab3" class="tab">
+									<div class="taskList taskLine-3">
 										<ul>
 											<li>
 												<a href="#" class="row no-gutter">
@@ -257,36 +207,28 @@
 													<div class="row col-80">
 														<h3>广东国际大宗商品价格监测日报</h3>
 														<p>报告期：<span>2016-12-12（第139期）</span></p>
-													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报222</h3>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
+														<p>剩余时间：<span>已过期</span></p>
 													</div>
 												</a>
 											</li>
 										</ul>
 									</div>
-								</div>
+								</div>-->
 								<!--已退回-->
 								<div id="tab4" class="tab">
 									<div class="taskList">
 										<ul>
-											<li>
-												<a href="#" class="row no-gutter">
+											<li v-for = 'item in ListReturnArr'>
+												<f7-link href="#" class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
+														<h3>{{item.taskName}}</h3>
 														<p class="col-50">实审/应审：<span>0/1</span></p>
 														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>剩余时间：<span>3小时39分</span></p>
-														<p>报告期：<span>2016-12-12（第139期）</span></p>
+														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
 													</div>
-												</a>
+												</f7-link>
 											</li>
 										</ul>
 									</div>
@@ -295,25 +237,15 @@
 								<div id="tab5" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
-											<li>
-												<a href="#" class="row no-gutter">
+											<li v-for = 'item in ListCompletedArr'>
+												<f7-link href="#" class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报</h3>
-														<p>报告期：<span>2016-12-12</span></p>
-														<p>完成时间：<span>2016-12-12 11:21</span></p>
+														<h3>{{item.taskName}}</h3>
+														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>完成时间：<span>item.reportedTime.substring(0,10)</span></p>
 													</div>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="row no-gutter">
-													<div class="col-20"><i class="iconfont color-dblue">&#xe6a1;</i></div>
-													<div class="row col-80">
-														<h3>广东国际大宗商品价格监测日报222</h3>
-														<p>报告期：<span>2016-12-12</span></p>
-														<p>完成时间：<span>2016-12-12 11:21</span></p>
-													</div>
-												</a>
+												</f7-link>
 											</li>
 										</ul>
 									</div>
@@ -325,7 +257,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Search" tab >
+			<f7-view id="index-Search" tab>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed no-page-content>
@@ -354,7 +286,7 @@
 					</f7-page>
 				</f7-pages>
 			</f7-view>
-			<f7-view id="index-Wo" tab >
+			<f7-view id="index-Wo" tab>
 				<!-- Pages -->
 				<f7-pages>
 					<f7-page navbar-fixed toolbar-fixed>
@@ -407,7 +339,7 @@
 													<div class="user-box-btn">点击登录</div>
 												</div>
 											</a>
-											
+
 										</li>
 									</ul>
 								</div>
@@ -481,60 +413,70 @@
 				<f7-link :icon="classObject2" text="查询" tab-link="#index-Search" @click='changeIcon(2)'></f7-link>
 				<f7-link :icon="classObject3" text="我的" tab-link="#index-Wo" @click='changeIcon(3)'></f7-link>
 			</f7-toolbar>
-			<f7-login-screen opened>
-			  <!-- Login Screen content goes here -->
-			   <f7-view>
-			    <f7-pages>
-			      <f7-page login-screen no-page-content >
-				       <div class="page-content login-screen-content d-login">
-				<div class="login-logo">
-					<img src="../static/images.png" alt="logo"/>
-					<p>广东价格</p>
-				</div>
-				<form>
-					<div class="list-block">
-						<ul>
-							<li class="item-content">
-								<div class="item-media"><i class="iconfont">&#xe606;</i></div>
-								<div class="item-inner">
-									<div class="item-input">
-										<input type="text" v-model="User.loginName" name="username" placeholder="请输入用户名">
-									</div>
+			<f7-login-screen>
+				<!-- Login Screen content goes here -->
+				<f7-view>
+					<f7-pages>
+						<f7-page login-screen no-page-content>
+							<div class="page-content login-screen-content d-login">
+								<div class="login-logo">
+									<img src="../static/images.png" alt="logo" />
+									<p>广东价格</p>
 								</div>
-							</li>
-							<li class="item-content">
-								<div class="item-media"><i class="iconfont">&#xe629;</i></div>
-								<div class="item-inner">
-									<div class="item-input">
-										<input type="password" v-model="User.loginPwd"  name="password" placeholder="请输入登录密码">
+								<form>
+									<div class="list-block">
+										<ul>
+											<li class="item-content">
+												<div class="item-media"><i class="iconfont">&#xe606;</i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="text" v-model="User.loginName" name="username" placeholder="请输入用户名">
+													</div>
+												</div>
+											</li>
+											<li class="item-content">
+												<div class="item-media"><i class="iconfont">&#xe629;</i></div>
+												<div class="item-inner">
+													<div class="item-input">
+														<input type="password" v-model="User.loginPwd" name="password" placeholder="请输入登录密码">
+													</div>
+												</div>
+											</li>
+										</ul>
+										<input class="button" @click.prevent="login" type="submit" name="submit" value="登录">
 									</div>
-								</div>
-							</li>
-						</ul>
-						<input class="button" type="submit" name="submit" value="登录">
-					</div>
-					<div class="list-block">
-						<div class="list-block-label">
-							<p><a href="#" class="close-login-screen">Close Login Screen</a></p>
-						</div>
-					</div>
-				</form>
-				<div class="copyright">广东省价格监测中心</div>
-			</div></f7-page>
-			    </f7-pages>
-			  </f7-view>
+									<div class="list-block">
+										<div class="list-block-label">
+											<p>
+												<a href="#" class="close-login-screen">Close Login Screen</a>
+											</p>
+										</div>
+									</div>
+								</form>
+								<div class="copyright">广东省价格监测中心</div>
+							</div>
+						</f7-page>
+					</f7-pages>
+				</f7-view>
 			</f7-login-screen>
+
 		</f7-views>
 
 	</div>
 </template>
 
 <script>
-	import SelectArea from "./components/selectArea";
-
+	import SelectArea from "./components/selectArea"
+	import Vue from 'vue'
 	export default {
 		data() {
 			return {
+				//登陆变量
+				User: {
+					loginName: '',
+					loginPwd: ''
+				},
+				//index变量
 				bgStyle: {
 					background: "url(" + require("./assets/bg.png") + ") no-repeat",
 					backgroundSize: '100% 100%'
@@ -545,14 +487,40 @@
 				classObject3: 'iconfont icon-wo1',
 				defaultArea: "广州",
 				AreaDisplay: "none",
-				User: {
-					loginName: '11',
-					loginPwd: '22'
-				}
-				
+				ListWriteArr:[],//任务填报
+				ListReturnArr:[],//任务退回
+				ListCompletedArr:[],//任务完成
 			}
 		},
+		mounted: function() {
+			if(!localStorage.getItem('token')) {
+				var myapp = new Framework7();
+				myapp.loginScreen();
+			}
+			this.taskListWriteData();
+			this.taskListReturnData();
+			this.taskListCompletedData();
+		},
+		computed: {},
 		methods: {
+			taskListWriteData: function(){
+				//获取任务填报数据
+				this.$ajax.taskListWrite().then(res => {
+					this.ListWriteArr = [...res.dataList];
+				})
+			},
+			taskListReturnData: function(){
+				//获取任务退回数据
+				this.$ajax.taskListReturn().then(res => {
+					this.ListReturnArr = [...res.dataList];
+				})
+			},
+			taskListCompletedData: function(){
+				//获取任务完成数据
+				this.$ajax.taskListCompleted().then(res => {
+					this.ListCompletedArr = [...res.dataList];
+				})
+			},
 			changeIcon: function(index) {
 				switch(index) {
 					case 0:
@@ -581,16 +549,86 @@
 						break;
 				}
 			},
-			BtnChange: function(){
-				if(this.AreaDisplay == 'none'){
+			BtnChange: function() {
+				if(this.AreaDisplay == 'none') {
 					this.AreaDisplay = 'flex'
-				} else{
+				} else {
 					this.AreaDisplay = 'none'
 				}
 			},
-			BtnValue:function(value){
+			BtnValue: function(value) {
 				this.defaultArea = value;
 				this.BtnChange();
+			},
+			issueTimeSub: function(time) {
+				return time.substring(0, 10);
+			},
+			//登陆事件
+			login: function() {
+				if(this.User.loginName.trim() == '' || this.User.loginName == 'undefined') {
+					f7.alert("用户名为空");
+				} else if(this.User.loginPwd.trim() == '') {
+					f7.alert("密码为空");
+				} else {
+					this.$ajax.Login(this.User)
+						.then(response => {
+							if('token' in response) {
+								localStorage.setItem('token', response.token);
+								f7.closeModal();
+							} else if('msg' in response) {
+								f7.alert(response.msg);
+							}
+						})
+				}
+			},
+			//计算剩余时间
+			timeRemaining: function(end) {
+				//计算时间
+				let currTime = new Date().getTime(),//当前时间
+						endTime = new Date(end).getTime();//结束时间
+				if(end != null && endTime >= currTime){
+					let remaining = endTime - currTime,
+							h = Math.floor(remaining/(3600*1000)),//时
+							min = Math.floor((remaining%(3600*1000))/(60*1000));//分
+					return h + '时' + min + '分'
+				}else{
+					return "已过期"
+				}
+
+			},
+			/*
+			 * 链接--例子
+			 *	:href="bindLink('TaskWrite', [item.taskReportedId, item.taskCataId],[{index: item.taskReportedId,id: item.taskCataId}])"
+			 *	返回：href = '/TaskWrite/1711818/1/?index=1711818&id:1'
+			 */
+			bindLink: function(path,params,query){
+				let pathHead = '/'+ path + '/';
+
+				//判断params参数是否为空
+				if(params != undefined && params.length != 0){
+					for(let i=0;i<params.length;i++){
+						if(params[i] == null && params[i] == undefined ){
+							if(i < params.length){
+								continue;
+							}else{
+								return pathHead;
+							}
+						}
+						else{
+							pathHead = pathHead + params[i] + '/';
+
+							if(i+1 == params.length && query == undefined){
+								return pathHead;
+							} else if(i+1 >= params.length && query.length != 0){
+								let queryStr = JSON.stringify(query[0]).replace(/{/, '?').replace(/,/, '&').replace(/:/g, '=').replace(/"/g, '').replace(/}/, '');
+								return pathHead + queryStr;
+							}
+						}
+					}
+				}else{
+					return pathHead;
+				}
+
 			}
 		},
 		components: { SelectArea }
