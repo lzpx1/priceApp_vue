@@ -103,6 +103,14 @@ export default {
     /**
      * 获取个人信息
      */
-    personalInformation(params){return fetch('/Personal/findInformation' , params)}
+    personalInformation(params){return fetch('/Personal/findInformation' , params)},
+	/**
+	 * 通知公告列表
+	 */
+	NoticeList (){ return fetch('/findNoticeList.do')},
+	/**
+	 * 通知公告详情
+	 */
+	NoticeDetail (){return fetch('/loadNoticeById.do')},
 }
 

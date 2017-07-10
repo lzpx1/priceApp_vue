@@ -23,6 +23,59 @@
 						</f7-navbar>
 						<!-- Page Content -->
 
+						<!--填报版首页-->
+						<div class="content-block in_img">
+							<img class="img" src="../static/first.jpg">
+						</div>
+						<div class="content-block cb-title">
+							<div class="big">
+								待填报<span class="radiu  b_radiu">{{WriteListArr.length}}</span>
+								<span class="right spec">查看更多</span>
+							</div>
+						</div>
+						<div class="content-block cb-title">
+							<div class="content-block-inner">
+								<ul>
+									<li v-if="WriteListArr.length == 0" class="NoData">暂无数据</li>
+									<li v-for = 'item in WriteListArr'>
+										<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])" class="row no-gutter">
+											<p class="big"><span class="radiu"></span>{{item.taskName}}</p>
+											<p class="spec">
+												<span class="left">报告期：{{timeChange(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span>
+												<span class="right">状态：<span class="black">未完成</span></span>
+											</p>
+										</f7-link>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="content-block cb-title">
+							<div class="big">
+								公告通知<span class="radiu  b_radiu">{{NoticeListArr.length}}</span>
+								<span class="right spec">查看更多</span>
+							</div>
+						</div>
+						<div class="content-block cb-title">
+							<div class="content-block-inner">
+								<ul>
+									<li v-if="NoticeListArr.length == 0" class="NoData">暂无数据</li>
+									<li v-for='item in NoticeListArr'>
+										<f7-link :href="bindLink('News',[item.bullentId])" class="row no-gutter">
+											<p class="big">
+												<span class="radiu"></span>{{item.title}}<span class="right spec">{{item.sendOrg}}</span>
+											</p>
+											<p class="spec">
+												<span class="spec left">{{issueTimeSub(item.noticeDate)}}</span>
+												<span class="right spec">状态：<span class="black">未读</span></span>
+											</p>
+										</f7-link>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!--填报版首页-->
+
 						<!--地区和搜索框-->
 						<div class="row c_con no-gutter">
 							<div class="col-20">
@@ -165,14 +218,15 @@
 								<div id="tab1" class="tab active">
 									<div class="taskList">
 										<ul>
-											<li v-for = 'item in ListWriteArr' >
+											<li v-if="WriteListArr.length == 0" class="NoData">暂无数据</li>
+											<li v-for = 'item in WriteListArr' >
 												<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])" class="row no-gutter">
 													<div class="col-20 new"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
 														<h3>{{item.taskName}}</h3>
 														<p class="col-50">实审/应审：<span>0/1</span></p>
 														<p class="col-50">实审/应审：<span>1/1</span></p>
-														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>报告期：<span>{{timeChange(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
 														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
 													</div>
 												</f7-link>
@@ -184,12 +238,13 @@
 								<div id="tab2" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
-											<li v-for = 'item in ListWriteArr'>
+											<li v-if="WriteListArr.length == 0" class="NoData">暂无数据</li>
+											<li v-for = 'item in WriteListArr'>
 												<f7-link :href="bindLink('TaskWrite', [item.taskReportedId,item.taskCataId])"  class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
 														<h3>{{item.taskName}}</h3>
-														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>报告期：<span>{{timeChange(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
 														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
 													</div>
 												</f7-link>
@@ -218,7 +273,8 @@
 								<div id="tab4" class="tab">
 									<div class="taskList">
 										<ul>
-											<li v-for = 'item in ListReturnArr'>
+											<li v-if="ReturnListArr.length == 0" class="NoData">暂无数据</li>
+											<li v-for = 'item in ReturnListArr'>
 												<f7-link href="#" class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
@@ -226,7 +282,7 @@
 														<p class="col-50">实审/应审：<span>0/1</span></p>
 														<p class="col-50">实审/应审：<span>1/1</span></p>
 														<p>剩余时间：<span>{{timeRemaining(item.taskEndTime)}}</span></p>
-														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>报告期：<span>{{timeChange(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
 													</div>
 												</f7-link>
 											</li>
@@ -237,13 +293,14 @@
 								<div id="tab5" class="tab">
 									<div class="taskList taskLine-3">
 										<ul>
-											<li v-for = 'item in ListCompletedArr'>
+											<li v-if="CompletedListArr.length == 0" class="NoData">暂无数据</li>
+											<li v-for = 'item in CompletedListArr'>
 												<f7-link href="#" class="row no-gutter">
 													<div class="col-20"><i class="iconfont color-dgreen">&#xe6a2;</i></div>
 													<div class="row col-80">
 														<h3>{{item.taskName}}</h3>
-														<p>报告期：<span>{{issueTimeSub(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
-														<p>完成时间：<span>item.reportedTime.substring(0,10)</span></p>
+														<p>报告期：<span>{{timeChange(item.issueTime)}}{{item.taskTimes ? '(第' + item.taskTimes.substring(5) + '期)' : ''}}</span></p>
+														<p>完成时间：<span>{{timeChange(item.reportedTime)}}</span></p>
 													</div>
 												</f7-link>
 											</li>
@@ -467,6 +524,7 @@
 
 <script>
 	import SelectArea from "./components/selectArea"
+	import {bindLink,timeRemaining,issueTimeSub,timeChange} from "./components/gather.vue"
 	import Vue from 'vue'
 	export default {
 		data() {
@@ -487,9 +545,10 @@
 				classObject3: 'iconfont icon-wo1',
 				defaultArea: "广州",
 				AreaDisplay: "none",
-				ListWriteArr:[],//任务填报
-				ListReturnArr:[],//任务退回
-				ListCompletedArr:[],//任务完成
+				WriteListArr:[],//任务填报
+				ReturnListArr:[],//任务退回
+				CompletedListArr:[],//任务完成
+				NoticeListArr:[],//通知公告列表
 			}
 		},
 		mounted: function() {
@@ -497,29 +556,27 @@
 				var myapp = new Framework7();
 				myapp.loginScreen();
 			}
-			this.taskListWriteData();
-			this.taskListReturnData();
-			this.taskListCompletedData();
+			this.initData();
 		},
 		computed: {},
 		methods: {
-			taskListWriteData: function(){
+			initData: function(){
 				//获取任务填报数据
 				this.$ajax.taskListWrite().then(res => {
-					this.ListWriteArr = [...res.dataList];
-				})
-			},
-			taskListReturnData: function(){
+					this.WriteListArr = [...res.dataList];
+				});
 				//获取任务退回数据
 				this.$ajax.taskListReturn().then(res => {
-					this.ListReturnArr = [...res.dataList];
-				})
-			},
-			taskListCompletedData: function(){
+					this.ReturnListArr = [...res.dataList];
+				});
 				//获取任务完成数据
 				this.$ajax.taskListCompleted().then(res => {
-					this.ListCompletedArr = [...res.dataList];
-				})
+					this.CompletedListArr = [...res.dataList];
+				});
+				//获取通知公告列表
+				this.$ajax.NoticeList().then(res => {
+					this.NoticeListArr = [...res.dataList];
+				});
 			},
 			changeIcon: function(index) {
 				switch(index) {
@@ -560,9 +617,6 @@
 				this.defaultArea = value;
 				this.BtnChange();
 			},
-			issueTimeSub: function(time) {
-				return time.substring(0, 10);
-			},
 			//登陆事件
 			login: function() {
 				if(this.User.loginName.trim() == '' || this.User.loginName == 'undefined') {
@@ -581,55 +635,10 @@
 						})
 				}
 			},
-			//计算剩余时间
-			timeRemaining: function(end) {
-				//计算时间
-				let currTime = new Date().getTime(),//当前时间
-						endTime = new Date(end).getTime();//结束时间
-				if(end != null && endTime >= currTime){
-					let remaining = endTime - currTime,
-							h = Math.floor(remaining/(3600*1000)),//时
-							min = Math.floor((remaining%(3600*1000))/(60*1000));//分
-					return h + '时' + min + '分'
-				}else{
-					return "已过期"
-				}
-
-			},
-			/*
-			 * 链接--例子
-			 *	:href="bindLink('TaskWrite', [item.taskReportedId, item.taskCataId],[{index: item.taskReportedId,id: item.taskCataId}])"
-			 *	返回：href = '/TaskWrite/1711818/1/?index=1711818&id:1'
-			 */
-			bindLink: function(path,params,query){
-				let pathHead = '/'+ path + '/';
-
-				//判断params参数是否为空
-				if(params != undefined && params.length != 0){
-					for(let i=0;i<params.length;i++){
-						if(params[i] == null && params[i] == undefined ){
-							if(i < params.length){
-								continue;
-							}else{
-								return pathHead;
-							}
-						}
-						else{
-							pathHead = pathHead + params[i] + '/';
-
-							if(i+1 == params.length && query == undefined){
-								return pathHead;
-							} else if(i+1 >= params.length && query.length != 0){
-								let queryStr = JSON.stringify(query[0]).replace(/{/, '?').replace(/,/, '&').replace(/:/g, '=').replace(/"/g, '').replace(/}/, '');
-								return pathHead + queryStr;
-							}
-						}
-					}
-				}else{
-					return pathHead;
-				}
-
-			}
+			bindLink: bindLink,//链接--例子详情gather.vue
+			timeRemaining: timeRemaining,//计算剩余时间
+			issueTimeSub: issueTimeSub,//截取时间 10位
+			timeChange: timeChange,//时间格式转换和截取
 		},
 		components: { SelectArea }
 	}
