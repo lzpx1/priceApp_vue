@@ -92,7 +92,7 @@ export default [
       component: require('./pages/Notice.vue')
   },
   {
-	  path: '/News/',
+	  path: '/News/:bullentId',
       component: require('./pages/News.vue')
   },
   {

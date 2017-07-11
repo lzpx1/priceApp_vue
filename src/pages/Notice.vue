@@ -1,5 +1,5 @@
 <template>
-	<f7-page navbar-fixed no-tabbar data-page="Notice" id="Notice" @page:beforeanimation="pageInit">
+	<f7-page navbar-fixed no-tabbar data-page="Notice" id="Notice" ><!--@page:beforeanimation="pageInit"-->
 		<!--导航-->
 		<f7-navbar v-if="$theme.ios">
 			<f7-nav-left sliding>
@@ -12,7 +12,28 @@
 			</f7-nav-right>
 		</f7-navbar>
 		<!--内容-->
-		<div class="swiper-nav swiper-container swiper-free-mode   TabSwiperNav" style="border-bottom: 1px solid #eaeaea;">
+
+		<ul class="Notice_list">
+			<li v-if="NoticeListArr.length == 0" class="NoData">暂无数据</li>
+			<li v-for="item in NoticeListArr">
+				<f7-link :href="bindLink('News',[item.bullentId])" class="row no-gutter">
+					<div class="col-20">
+						<i class="iconfont icon-tongzhigonggao1"></i>
+					</div>
+					<div class="col-80">
+						<p>
+							<span class="PName">{{item.title}}</span>
+						</p>
+						<p>
+							<span>{{issueTimeSub(item.noticeDate)}}</span>
+							<span class="right">{{item.sendOrg}}</span>
+						</p>
+					</div>
+				</f7-link>
+			</li>
+		</ul>
+
+		<!--<div class="swiper-nav swiper-container swiper-free-mode   TabSwiperNav" style="border-bottom: 1px solid #eaeaea;">
 			<div class="swiper-wrapper buttons-row">
 				<div class="swiper-slide swiper-slide-visible swiper-slide-active active button">未完成</div>
 				<div class="swiper-slide swiper-slide-visible button">已完成</div>
@@ -96,19 +117,43 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 		<!--结束-->
 		<!---->
 	</f7-page>
 </template>
 
 <script>
-	import InitPage from '../components/PageInit.vue';
+	/*import InitPage from '../components/PageInit.vue';
 	export default {
 		methods: {
 			pageInit: function() {
 				InitPage.SwiperInit();
 			}
 		}
+	}*/
+	import {bindLink,timeRemaining,issueTimeSub,timeChange} from "../components/gather.vue"
+	export default {
+		data(){
+		return {
+			NoticeListArr:[],
+		}
+	},
+	mounted:function(){
+		this.initData();
+	},
+	methods:{
+		initData: function(){
+			//获取通知公告列表
+			this.$ajax.NoticeList().then(res => {
+				this.NoticeListArr = [...res.dataList];
+			});
+		},
+		bindLink: bindLink,//链接--例子详情gather.vue
+		timeRemaining: timeRemaining,//计算剩余时间
+		issueTimeSub: issueTimeSub,//截取时间 10位
+		timeChange: timeChange,//时间格式转换和截取
+	},
+	components:{}
 	}
 </script>
