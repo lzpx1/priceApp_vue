@@ -119,12 +119,12 @@
 			<div class="taskToolbarBox">
 				<div class="row no-gutter taskToolbar">
 					<div class="col-40 btn d-TaskList" @click="filledTask">
-						<label>16</label>
+						<label>{{ filledCount }}</label>
 						<p class="title">已填写</p>
 						<p class="text">可进行修改</p>
 					</div>
-					<div class="col-30 btn" @click="SaveData">暂存</div>
-					<div class="col-30 btn">提交</div>
+					<div class="col-30 btn" @click="SandUData(0)">暂存</div>
+					<div class="col-30 btn" @click="SandUData(1)">提交</div>
 				</div>
 				<div class="taskList" v-show="filled">
 					<ul>
@@ -218,19 +218,25 @@
 //					}]
 				},
 				selected: '0',
-				DataList: [],
-				filledDataList: [],
+				DataList: [], //显示的商品列表
+				filledDataList: [], //已填报商品列表
+				SandUDataList:[], //暂存或上报列表
 				mercName: '',
 				mercIndex: '',
 				merctext: '',
 				remarksBox: false,
-				iswave:'',
+				iswave: false,
 				options: [
 					{ text: '成本', value: '0' },
 					{ text: '供给', value: '1' },
 					{ text: '需求', value: '2' },
 					{ text: '金融', value: '3' }
 				]
+			}
+		},
+		computed: {
+			filledCount: function(){
+				return this.filledDataList.length;
 			}
 		},
 		methods: {
@@ -251,40 +257,61 @@
 						}
 					}
 					this.DataList = res.DataList;
-					console.log(res.DataList);
 				})
 			},
 			//暂存事件
-			SaveData: function() {
+			SandUData: function(index) {
+				this.SandUDataList = [];
+				this.SandUDataList = this.filledDataList.concat(this.DataList);
+				if(index == 0) {
+					this.HandleDataList(this.SandUDataList);
+					this.$ajax.Savedata(this.Pjson).then(res => {
+						console.log(res);
+					});
+				}else{
+					let isright = false ;
+					for(var key in this.SandUDataList){
+						if(this.SandUDataList[key].price.trim() == ''){
+							isright =  true;
+							f7.alert(this.SandUDataList[key].mercName + "价格没有填写！");
+							break;
+						}
+					}
+					if(!isright){
+						console.log('提交');
+						this.$ajax.UpdateData(this.Pjson).then(res => {
+							console.log(res);
+						});
+					}
+				}
+			},
+			HandleDataList: function(DataList){
+				this.Pjson = {};
 				var token = localStorage.getItem('token');
 				this.Pjson.token = token;
 				this.Pjson.objectId = "2028";
 				this.Pjson.taskDireId = "195";
-				this.Pjson.taskReportedId = "37393";
+				this.Pjson.taskReportedId = this.$route.params.taskReportedId;
 				this.Pjson.dataList = [];
-				for(var key in this.filledDataList){
+				for(var key in DataList){
 					this.Pjson.dataList[key] = {};
-					this.Pjson.dataList[key].dataValue = this.isNull(this.filledDataList[key].price);
-					this.Pjson.dataList[key].firstAckValue = this.isNull(this.filledDataList[key].fistPrice);
-					this.Pjson.dataList[key].secondAckValue = this.isNull(this.filledDataList[key].nextPrice);
-					this.Pjson.dataList[key].lastAckValue = this.isNull(this.filledDataList[key].lastPrice);
+					this.Pjson.dataList[key].dataValue = this.isNull(DataList[key].price);
+					this.Pjson.dataList[key].firstAckValue = this.isNull(DataList[key].fistPrice);
+					this.Pjson.dataList[key].secondAckValue = this.isNull(DataList[key].nextPrice);
+					this.Pjson.dataList[key].lastAckValue = this.isNull(DataList[key].lastPrice);
 					this.Pjson.dataList[key].indicatorId = null;
-					this.Pjson.dataList[key].mercName = this.isNull(this.filledDataList[key].mercName);
-					this.Pjson.dataList[key].mercSpec = this.isNull(this.filledDataList[key].spec);
-					this.Pjson.dataList[key].mercGrade = this.isNull(this.filledDataList[key].grade);
-					this.Pjson.dataList[key].unitName = this.isNull(this.filledDataList[key].unit);
-					this.Pjson.dataList[key].unitId = this.isNull(this.filledDataList[key].indicatorId);
-					this.Pjson.dataList[key].waveReason = this.isNull(this.filledDataList[key].waveReason);
-					this.Pjson.dataList[key].waveReasonRemark = this.isNull(this.filledDataList[key].waveReasonRemark);
-					this.Pjson.dataList[key].dataValueLast = this.isNull(this.filledDataList[key].priorPrice);
-					this.Pjson.dataList[key].isProblem = this.isNull(this.filledDataList[key].isProblem);
+					this.Pjson.dataList[key].mercName = this.isNull(DataList[key].mercName);
+					this.Pjson.dataList[key].mercSpec = this.isNull(DataList[key].spec);
+					this.Pjson.dataList[key].mercGrade = this.isNull(DataList[key].grade);
+					this.Pjson.dataList[key].unitName = this.isNull(DataList[key].unit);
+					this.Pjson.dataList[key].unitId = this.isNull(DataList[key].indicatorId);
+					this.Pjson.dataList[key].waveReason = this.isNull(DataList[key].waveReason);
+					this.Pjson.dataList[key].waveReasonRemark = this.isNull(DataList[key].waveReasonRemark);
+					this.Pjson.dataList[key].dataValueLast = this.isNull(DataList[key].priorPrice);
+					this.Pjson.dataList[key].isProblem = this.isNull(DataList[key].isProblem);
 					this.Pjson.dataList[key].noChangeTimes = 1;
 					this.Pjson.dataList[key].isError = null;
 				}
-				console.log(this.Pjson);
-				this.$ajax.Savedata(this.Pjson).then(res => {
-					console.log(res);
-				});
 				
 			},
 			isNull: function(val){
@@ -328,8 +355,11 @@
 				this.DataList[this.mercIndex].waveReasonRemark = this.merctext;
 				this.DataList[this.mercIndex].waveReason = this.selected;
 				this.CloseRemarksBox();
+				if(this.iswave && this.merctext.trim() != ''){
+					this.hasFilled(this.mercIndex);
+				}
 			}
 		},
 		components: { TaskWriteLi }
 	}
-
+</script>

@@ -30,7 +30,7 @@
 		props: ['ProductItem','index'],
 		filters:{
 		},
-		computed:{
+		computed: {
 			wave: function(){
 				return Math.floor((this.ProductItem.price - this.ProductItem.priorPrice)*100)/100;
 			}
@@ -44,7 +44,8 @@
 				}
 			},
 			blur: function(){
-				//还要做条件判断
+				//还要做更具体条件判断
+				//判断是涨跌幅过大自动弹出备注框   否则填写完成
 				if(this.ProductItem.price.trim() != '' && (this.wave > 3 || this.wave < -3)){
 					if(this.ProductItem.waveReasonRemark.trim() == ''){
 						this.$emit("ShowRemarksBox",this.index,true);
@@ -52,7 +53,6 @@
 						this.$emit("hasFilled",this.index);
 					}
 				} else if(this.ProductItem.price.trim() != ''){
-					console.log("suc");
 					this.$emit("hasFilled",this.index);
 				}
 			},

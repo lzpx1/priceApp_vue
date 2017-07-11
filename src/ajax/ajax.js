@@ -38,7 +38,7 @@ function fetch(url, params) {
 	    axios.post(url, params)
 	        .then(response => {
 	            resolve(response);
-	        }).catch(error => {
+	       }).catch(error => {
 	            reject(error) ;
 	        })
 	})
@@ -84,6 +84,9 @@ export default {
      */
     Savedata(params){
     	return fetch('/support/temporarySave.do',{ json : JSON.stringify(params) });
+    },
+    UpdateData(params){
+    	return fetch('/support/submitSave.do',{ json : JSON.stringify(params) });
     },
     getInitForm(){
     	return fetchGet('/getInitFormDataForObj.do');
