@@ -33,12 +33,12 @@ axios.interceptors.response.use((res) =>{
 	return Promise.reject(error);
 });
 
-function fetch(url, params) {
+function fetch(url, params = {}) {
 	return new Promise((resolve, reject) => {
 	    axios.post(url, params)
 	        .then(response => {
 	            resolve(response);
-	        }).catch(error => {
+	       }).catch(error => {
 	            reject(error) ;
 	        })
 	})
@@ -85,6 +85,9 @@ export default {
     Savedata(params){
     	return fetch('/support/temporarySave.do',{ json : JSON.stringify(params) });
     },
+    UpdateData(params){
+    	return fetch('/support/submitSave.do',{ json : JSON.stringify(params) });
+    },
     getInitForm(){
     	return fetchGet('/getInitFormDataForObj.do');
     },
@@ -103,6 +106,14 @@ export default {
     /**
      * 获取个人信息
      */
-    personalInformation(params){return fetch('/Personal/findInformation' , params)}
+    personalInformation(params){return fetch('/Personal/findInformation' , params)},
+	/**
+	 * 通知公告列表
+	 */
+	NoticeList (){ return fetch('/findNoticeList.do')},
+	/**
+	 * 通知公告详情
+	 */
+	NoticeDetail (){return fetch('/loadNoticeById.do')},
 }
 
