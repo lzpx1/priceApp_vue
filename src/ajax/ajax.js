@@ -33,7 +33,7 @@ axios.interceptors.response.use((res) =>{
 	return Promise.reject(error);
 });
 
-function fetch(url, params = {}) {
+function fetch(url, params) {
 	return new Promise((resolve, reject) => {
 	    axios.post(url, params)
 	        .then(response => {
