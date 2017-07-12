@@ -626,7 +626,9 @@
 					this.$ajax.Login(this.User)
 						.then(response => {
 							if('token' in response) {
-								localStorage.setItem('token', response.token);
+								localStorage.setItem('token' , response.token);
+								localStorage.setItem('objectId' , response.userInfo.objectId );
+								localStorage.setItem('accountId' , response.userInfo.accountId );
 								f7.closeModal();
 							} else if('msg' in response) {
 								f7.alert(response.msg);
