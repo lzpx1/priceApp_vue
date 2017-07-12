@@ -94,19 +94,19 @@ export default {
     /**
      * 获取任务填报列表
      */
-	taskListWrite(){ return fetch('/Fill/findListFill') },
+	taskListWrite(token,object_Id){ return fetch('/Fill/findListFill', { costoken:token, objectId:375} )},
     /**
      * 获取任务退回
      */
-    taskListReturn(params){return fetch('/Fill/findReturnList' , params)},
+    taskListReturn(token,object_Id){return fetch('/Fill/findReturnList' , { costoken:token, objectId:4199} )},
     /**
      * 获取任务完成
      */
-    taskListCompleted(params){return fetch('/Fill/findCompletedList' , params)},
+    taskListCompleted(token,object_Id){return fetch('/Fill/findCompletedList' , { costoken:token, objectId:2028} )},
     /**
      * 获取个人信息
      */
-    personalInformation(params){return fetch('/Personal/findInformation' , params)},
+    personalInformation(token,account_Id){return fetch('/Personal/findInformation' , { costoken:token, accountId:33})},
 	/**
 	 * 通知公告列表
 	 */

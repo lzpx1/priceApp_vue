@@ -371,8 +371,8 @@
 													<div class="navbar-inner-img"><img src="../static/images.png" alt=""></div>
 												</div>
 												<div class="item-inner">
-													<p class="userName">陈志辉</p>
-													<p class="userCompany">广东省监测中心</p>
+													<p class="userName">personalInfo.userName</p>
+													<p class="userCompany">personalInfo.ownerUnit</p>
 
 												</div>
 											</f7-link>
@@ -548,32 +548,44 @@
 				ReturnListArr:[],//任务退回
 				CompletedListArr:[],//任务完成
 				NoticeListArr:[],//通知公告列表
+				personalInfo:'',//人员信息
+				token: '',
+				objectId: '',
+				accountId: '',
 			}
 		},
 		mounted: function() {
 			if(!localStorage.getItem('token')) {
 				var myapp = new Framework7();
 				myapp.loginScreen();
+			}else{
+				this.initData();
 			}
-			this.initData();
 		},
 		computed: {},
 		methods: {
 			initData: function(){
+				this.token = localStorage.getItem("token");
+				this.objectId = localStorage.getItem("objectId");
+				this.accountId = localStorage.getItem("accountId");
 				//获取任务填报数据
-				this.$ajax.taskListWrite().then(res => {
+				this.$ajax.taskListWrite(this.token,this.objectId).then(res => {
 					this.WriteListArr = [...res.dataList];
 				});
 				//获取任务退回数据
-				this.$ajax.taskListReturn().then(res => {
+				this.$ajax.taskListReturn(this.token,this.objectId).then(res => {
 					this.ReturnListArr = [...res.dataList];
 				});
 				//获取任务完成数据
-				this.$ajax.taskListCompleted().then(res => {
+				this.$ajax.taskListCompleted(this.token,this.objectId).then(res => {
 					this.CompletedListArr = [...res.dataList];
 				});
+				//获取人员信息
+				this.$ajax.personalInformation(this.token,this.accountId).then(res => {
+					this.personalInfo = res.userInfo;
+				});
 				//获取通知公告列表
-				this.$ajax.NoticeList().then(res => {
+				this.$ajax.NoticeList(this.token,this.objectId).then(res => {
 					this.NoticeListArr = [...res.dataList];
 				});
 			},
@@ -630,6 +642,7 @@
 								localStorage.setItem('objectId' , response.userInfo.objectId );
 								localStorage.setItem('accountId' , response.userInfo.accountId );
 								f7.closeModal();
+								this.initData();
 							} else if('msg' in response) {
 								f7.alert(response.msg);
 							}
