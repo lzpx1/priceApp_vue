@@ -77,7 +77,7 @@
 						<!--填报版首页-->
 
 						<!--地区和搜索框-->
-						<div class="row c_con no-gutter">
+						<!--<div class="row c_con no-gutter">
 							<div class="col-20">
 								<div class="c_region">
 									<span class="btnArea" @click="BtnChange">
@@ -91,9 +91,9 @@
 									<div class="c_search"><i class="iconfont icon-llhomesearch"></i>搜索商品</div>
 								</f7-link>
 							</div>
-						</div>
+						</div>-->
 						<!--8个按钮-->
-						<div class="row c_row">
+						<!--<div class="row c_row">
 							<div class="col-25">
 								<f7-link href="/Farm_food/"><i class="iconfont icon-nongmaoshipin bule"></i><span>农贸食品</span></f7-link>
 							</div>
@@ -118,10 +118,10 @@
 							<div class="col-25">
 								<f7-link href="/my_application/"><i class="iconfont icon-1 red"></i><span>全部</span></f7-link>
 							</div>
-						</div>
+						</div>-->
 
 						<!--最新价格-->
-						<div class="row c_row c_margin-top no-gutter c_padding-bottom">
+						<!--<div class="row c_row c_margin-top no-gutter c_padding-bottom">
 							<div class="col-100 c_margin-bottom"><b>最新价格</b>
 								<a class="right" href="Farm_food.html">全部</a>
 							</div>
@@ -146,10 +146,10 @@
 									<p><samp>环比:</samp><samp class="red">+0.15%</samp></p>
 								</a>
 							</div>
-						</div>
+						</div>-->
 
 						<!--最新咨询-->
-						<div class="row c_row c_padding-bottom">
+						<!--<div class="row c_row c_padding-bottom">
 							<div class="col-100 c_clo-100 c_margin-bottom"><b>最新咨询</b>
 								<a class="right" href="Price_news.html">全部</a>
 							</div>
@@ -177,12 +177,11 @@
 									</div>
 								</a>
 							</div>
-						</div>
+						</div>-->
 
 						<!--区域选择-->
-						<SelectArea :AreaDisplay="AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>
+						<!--<SelectArea :AreaDisplay="AreaDisplay" @areaToChange="BtnChange" @selectArea="BtnValue"></SelectArea>-->
 						<!--结束-->
-
 						<!-- page Content End-->
 
 					</f7-page>
@@ -635,10 +634,10 @@
 						})
 				}
 			},
-			bindLink: bindLink,//链接--例子详情gather.vue
-			timeRemaining: timeRemaining,//计算剩余时间
-			issueTimeSub: issueTimeSub,//截取时间 10位
-			timeChange: timeChange,//时间格式转换和截取
+			bindLink,//链接--例子详情gather.vue
+			timeRemaining,//计算剩余时间
+			issueTimeSub,//截取时间 10位
+			timeChange,//时间格式转换和截取
 		},
 		components: { SelectArea }
 	}
