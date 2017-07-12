@@ -149,10 +149,10 @@
 				this.NoticeListArr = [...res.dataList];
 			});
 		},
-		bindLink: bindLink,//链接--例子详情gather.vue
-		timeRemaining: timeRemaining,//计算剩余时间
-		issueTimeSub: issueTimeSub,//截取时间 10位
-		timeChange: timeChange,//时间格式转换和截取
+		bindLink,//链接--例子详情gather.vue
+		timeRemaining,//计算剩余时间
+		issueTimeSub,//截取时间 10位
+		timeChange,//时间格式转换和截取
 	},
 	components:{}
 	}

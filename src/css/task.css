@@ -243,7 +243,7 @@ html{font-size: 17px;}
     .d-login input[type="submit"]{height: 57px;}
 }
 /*填报版首页*/
-.taskBox .taskList li.NoData, #Notice  .Notice_list li.NoData{background: #efeff4;}
+.taskBox .taskList li.NoData, #Notice  .Notice_list li.NoData{background: #efeff4;border-bottom:none;}
 .NoData{background: inherit;  border: none;  padding: 1rem 0;  text-align: center;  font-size: 1rem;  color: #999;}
 .in_img{margin:0;padding: 0;}
 .in_img img{width: 100%;}

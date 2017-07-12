@@ -66,7 +66,7 @@
      * 时间格式转换和截取
      */
     function timeChange(date){
-        var d = new Date(date);
+        let d = new Date(date);
         return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();//2022-02-02
         //return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();//2022-02-02 09:00:00
     }
